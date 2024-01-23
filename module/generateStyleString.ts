@@ -5,7 +5,7 @@ import picssoWarning from "./picssoWarning";
 let picssoCustomConfig: PicssoConfigKeyType = {};
 
 try {
-  picssoCustomConfig = require("../../picsso.config");
+  picssoCustomConfig = require("../../picsso.config.ts");
 } catch (e) {
   picssoWarning();
 }
