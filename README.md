@@ -5,6 +5,8 @@ React-Picsso is a TypeScript-based npm library developed by Handle, a software d
 ## Features
 
 - **Simplified Styling**: Allows for the easy injection of styling logic into your custom React components with an intuitive API.
+- **Cohesive Management**: Enables easy and consistent management of styles across your project.
+- **TypeScript Support**: Offers full support and integration for TypeScript users.
 
 ## Installation
 
@@ -85,6 +87,8 @@ If you need to set up your custom configuration, you can do so using a configura
 
 JavaScript:
 
+picsso.config.js
+
 ```javascript
 export default {
   yourRedBorder: { getValue: () => "border: 2px dotted red;" },
@@ -92,6 +96,8 @@ export default {
 ```
 
 TypeScript:
+
+picsso.config.ts
 
 ```typescript
 export default {
