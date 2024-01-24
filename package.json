@@ -1,6 +1,6 @@
 {
   "name": "react-picsso",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "",
   "main": "./dist/bundle.cjs.js",
   "module": "./dist/bundle.esm.js",
