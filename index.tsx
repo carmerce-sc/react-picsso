@@ -2,7 +2,7 @@ import { PicssoConfigKeyType } from "./types";
 import upperCaseObjectKeys from "./module/upperCaseObjectKeys";
 import cse from "./module/createStyledElement";
 
-let Picsso = {
+let picsso = {
   html: cse("html"),
   body: cse("body"),
   div: cse("div"),
@@ -55,6 +55,6 @@ let Picsso = {
   wbr: cse("wbr"),
 } as PicssoConfigKeyType;
 
-Picsso = { ...Picsso, ...upperCaseObjectKeys(Picsso) };
+picsso = { ...picsso, ...upperCaseObjectKeys(picsso) };
 
-export default Picsso;
+export default picsso;

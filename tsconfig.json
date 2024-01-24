@@ -1,8 +1,14 @@
 {
-  "extends": "./tsconfig-base.json",
   "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "esnext"],
+    "jsx": "react",
     "module": "esnext",
-    "outDir": "dist/mjs",
-    "target": "esnext"
-  }
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["index.tsx", "src/*", "@picsso.defaultConfig/*"],
+  "exclude": ["node_modules"]
 }

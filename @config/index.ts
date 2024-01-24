@@ -2,19 +2,19 @@ import { toPixel } from "../../react-picsso/module/toPixel";
 import { PicssoConfigKeyType, numStr } from "../../react-picsso/types.d";
 import PicssoBorderConfig, {
   PicssoBorderConfigType,
-} from "../../react-picsso/@picsso.defaultConfig/border";
+} from "../../react-picsso/@config/border";
 import PicssoColorConfig, {
   PicssoColorConfigType,
-} from "../../react-picsso/@picsso.defaultConfig/color";
+} from "../../react-picsso/@config/color";
 import PicssoMarginConfig, {
   PicssoMarginConfigType,
-} from "../../react-picsso/@picsso.defaultConfig/margin";
+} from "../../react-picsso/@config/margin";
 import PicssoPaddingConfig, {
   PicssoPaddingConfigType,
-} from "../../react-picsso/@picsso.defaultConfig/padding";
+} from "../../react-picsso/@config/padding";
 import PicssoSizeConfig, {
   PicssoSizeConfigType,
-} from "../../react-picsso/@picsso.defaultConfig/size";
+} from "../../react-picsso/@config/size";
 
 const picssoDefaultConfig = {
   ...PicssoBorderConfig,
