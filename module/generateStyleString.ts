@@ -1,22 +1,12 @@
-import picssoDefaultConfig from "../@picsso.defaultConfig";
+import picssoDefaultConfig from "../@config";
 import { PicssoConfigKeyType } from "../types";
-import picssoWarning from "./picssoWarning";
 
-let picssoCustomConfig: PicssoConfigKeyType = {};
-
-try {
-  picssoCustomConfig = require("../../picsso.config.ts");
-} catch (e) {
-  picssoWarning();
-}
-
-export const targetConfig = {
-  ...picssoCustomConfig,
-  ...picssoDefaultConfig,
-};
-
-export default function generateStyleString(props: PicssoConfigKeyType) {
+export default function generateStyleString(
+  props: PicssoConfigKeyType,
+  customConfig: any
+) {
   const totalKeys = Object.keys(props) as (keyof PicssoConfigKeyType)[];
+  const targetConfig = { ...customConfig, ...picssoDefaultConfig };
   const piccsoConfigKeys = Object.keys(
     targetConfig
   ) as (keyof PicssoConfigKeyType)[];

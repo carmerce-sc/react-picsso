@@ -36,8 +36,8 @@ import MyWrapper from "./MyComponents/MyWrapper";
 function App() {
   return (
     <div>
-      <MyWrapper marginLeft={13}>{"prop: marginLeft={13}"}</MyWrapper>
-      <MyWrapper ml={13}>{"prop: ml={13}"}</MyWrapper>
+      <MyWrapper marginLeft={13}>{"prop: marginLeft={12}"}</MyWrapper>
+      <MyWrapper ml={13}>{"prop: ml={34}"}</MyWrapper>
       {/* Numerous configurations are available, and you can add your custom configs in root/picsso.config.ts if needed */}
     </div>
   );
@@ -52,7 +52,7 @@ For TypeScript users, here's how you can integrate React-Picsso with type suppor
 
 ```typescript
 import picsso from "react-picsso";
-import { PicssoDefaultConfigType } from "react-picsso/@picsso.defaultConfig";
+import { PicssoDefaultConfigType } from "react-picsso/@config";
 
 type MyComponentType = {
   children?: any;
