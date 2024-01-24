@@ -1,4 +1,4 @@
-# React-Picsso
+# 🎨 React-Picsso
 
 React-Picsso is a TypeScript-based npm library developed by Handle, a software development company. It's designed to simplify the building and cohesive management of styling for React components. This library aims for seamless integration with TypeScript, helping developers to perform styling tasks more quickly and efficiently.
 
@@ -20,10 +20,15 @@ Here's an example of how you can use React-Picsso to easily style your component
 
 ```javascript
 import picsso from "react-picsso";
+import customConfig from "../picsso.config";{/** option, if you want to set your own configurations. # See custom configuration below. */}
 
-const MyWrapper = ({ children, ...props }) => (
-  <picsso.Div {...props}>{children}</picsso.Div>
-);
+const MyWrapper = ({ children, ...props }) => {
+  return (
+    <picsso.Div {...props} customConfig={customConfig}{/** option, if you want to set your own configurations. # See custom configuration below. */}>
+      {children}
+    </picsso.Div>
+  );
+};
 
 export default MyWrapper;
 ```
@@ -39,6 +44,7 @@ function App() {
       <MyWrapper marginLeft={13}>{"prop: marginLeft={12}"}</MyWrapper>
       <MyWrapper ml={13}>{"prop: ml={34}"}</MyWrapper>
       {/* Numerous configurations are available, and you can add your custom configs in root/picsso.config.ts if needed */}
+      <MyWrapper yourRedBorder>{"A red border"}</MyWrapper>
     </div>
   );
 }
@@ -53,16 +59,54 @@ For TypeScript users, here's how you can integrate React-Picsso with type suppor
 ```typescript
 import picsso from "react-picsso";
 import { PicssoDefaultConfigType } from "react-picsso/@config";
+import customConfig, { PicssoCustomConfigType } from "../picsso.config";{/** option, if you want to set your own configurations. # See custom configuration below. */}
 
-type MyComponentType = {
+interface MyComponentType
+  extends PicssoDefaultConfigType,
+    PicssoCustomConfigType {
   children?: any;
-} & PicssoDefaultConfigType;
+}
 
 export default function MyWrapper({ children, ...props }: MyComponentType) {
   return (
-    <picsso.Div {...(props as PicssoDefaultConfigType)}>{children}</picsso.Div>
+    <picsso.Div
+      {...(props as PicssoDefaultConfigType)}
+      customConfig={customConfig}{/** option, if you want to set your own configurations. # See custom configuration below. */}
+    >
+      {children}
+    </picsso.Div>
   );
 }
+```
+
+## Custom Configuration
+
+If you need to set up your custom configuration, you can do so using a configuration file like below:
+
+JavaScript:
+
+```javascript
+export default {
+  yourRedBorder: { getValue: () => "border: 2px dotted red;" },
+};
+```
+
+TypeScript:
+
+```typescript
+export default {
+  yourRedBorder: { getValue: () => "border: 2px dotted red;" },
+};
+
+export type PicssoCustomConfigType = {
+  yourRedBorder?: boolean;
+};
+```
+
+## Custom configuration example
+
+```javascript
+<MyWrapper yourRedBorder>{"A red border"}</MyWrapper>
 ```
 
 ## TypeScript Support
