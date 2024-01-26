@@ -1,4 +1,4 @@
-import { PicssoConfigKeyType } from "./types";
+import { PicssoConfigKeyType } from "./@config/types/common";
 import upperCaseObjectKeys from "./module/upperCaseObjectKeys";
 import cse from "./module/createStyledElement";
 

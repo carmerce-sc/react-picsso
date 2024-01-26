@@ -1,6 +1,6 @@
-import { numStr } from "../../types";
+import { numStr } from "./common";
 
-type PicssoPaddingConfigType = {
+export type PicssoPaddingConfigType = {
   padding?: numStr;
   p?: numStr;
   paddingX?: numStr;
@@ -16,5 +16,3 @@ type PicssoPaddingConfigType = {
   paddingLeft?: numStr;
   pl?: numStr;
 };
-
-export default PicssoPaddingConfigType;

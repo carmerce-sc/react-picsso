@@ -1,6 +1,6 @@
-import { numStr } from "../../types";
+import { numStr } from "./common";
 
-type PicssoBorderConfigType = {
+export type PicssoBorderConfigType = {
   border?: string;
   borderRadius?: numStr;
   borderTop?: string;
@@ -12,4 +12,3 @@ type PicssoBorderConfigType = {
   borderLeft?: string;
   bl?: string;
 };
-export default PicssoBorderConfigType;

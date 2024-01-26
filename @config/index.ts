@@ -1,5 +1,5 @@
 import { toPixel } from "../../react-picsso/module/toPixel";
-import { PicssoConfigKeyType, numStr } from "../../react-picsso/types.d";
+import { PicssoConfigKeyType, numStr } from "./types/common";
 import PicssoBorderConfig from "../../react-picsso/@config/border";
 import PicssoColorConfig from "../../react-picsso/@config/color";
 import PicssoMarginConfig from "../../react-picsso/@config/margin";

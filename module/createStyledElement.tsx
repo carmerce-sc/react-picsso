@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { PicssoConfigKeyType } from "../types";
+import { PicssoConfigKeyType } from "../@config/types/common";
 import generateStyleString from "./generateStyleString";
 import picssoStyled from "./picssoStyled";
 
