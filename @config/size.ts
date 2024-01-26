@@ -1,5 +1,5 @@
 import { toPixel } from "../module/toPixel";
-import { PicssoConfigKeyType, numStr } from "../types.d";
+import { PicssoConfigKeyType, numStr } from "./types/common";
 
 export default {
   width: { getValue: (width: numStr) => `width:${toPixel(width)};` },

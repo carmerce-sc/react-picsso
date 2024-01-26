@@ -1,10 +1,10 @@
 {
   "name": "react-picsso",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "./dist/bundle.cjs.js",
   "module": "./dist/bundle.esm.js",
-  "types": "./dist/types/index.d.ts",
+  "types": "./types/index.d.ts",
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -cw"

@@ -1,6 +1,6 @@
-import { numStr } from "../../types";
+import { numStr } from "./common";
 
-type PicssoMarginConfigType = {
+export type PicssoMarginConfigType = {
   margin?: numStr;
   m?: numStr;
   marginX?: numStr;
@@ -16,5 +16,3 @@ type PicssoMarginConfigType = {
   marginLeft?: numStr;
   ml?: numStr;
 };
-
-export default PicssoMarginConfigType;
