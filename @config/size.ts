@@ -19,17 +19,3 @@ export default {
   minWidth: { getValue: (minWidth: numStr) => `min-width:${minWidth};` },
   minHeight: { getValue: (minWidth: numStr) => `min-height:${minWidth};` },
 } as PicssoConfigKeyType;
-
-export type PicssoSizeConfigType = {
-  width?: numStr;
-  w?: numStr;
-  height?: numStr;
-  h?: numStr;
-  size?: numStr | [numStr | numStr];
-  fullP?: boolean;
-  fullV?: boolean;
-  maxWidth?: numStr;
-  maxHeight?: numStr;
-  minWidth?: numStr;
-  minHeight?: numStr;
-};

@@ -1,5 +1,5 @@
 import { toPixel } from "../module/toPixel";
-import { PicssoConfigKeyType, numStr } from "../types.d";
+import { PicssoConfigKeyType, numStr } from "../types";
 
 export default {
   border: { getValue: (border: string) => `border:${border};` },
@@ -22,16 +22,3 @@ export default {
   },
   bl: { getValue: (borderLeft: numStr) => `border-left:${borderLeft};` },
 } as PicssoConfigKeyType;
-
-export type PicssoBorderConfigType = {
-  border?: string;
-  borderRadius?: numStr;
-  borderTop?: string;
-  bt?: string;
-  borderRight?: string;
-  br?: string;
-  borderBottom?: string;
-  bb?: string;
-  borderLeft?: string;
-  bl?: string;
-};

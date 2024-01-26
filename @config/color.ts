@@ -9,10 +9,3 @@ export default {
   bg: { getValue: (background: string) => `background:${background};` },
   color: { getValue: (color: string) => `color:${color};` },
 } as PicssoConfigKeyType;
-
-export type PicssoColorConfigType = {
-  background?: string;
-  backgroundColor?: string;
-  bg?: string;
-  color?: string;
-};
