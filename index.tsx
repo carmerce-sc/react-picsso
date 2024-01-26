@@ -1,6 +1,7 @@
 import { PicssoConfigKeyType } from "./@config/types/common";
 import upperCaseObjectKeys from "./module/upperCaseObjectKeys";
 import cse from "./module/createStyledElement";
+import PDCT from "./@config/types/index.d";
 
 let picsso = {
   html: cse("html"),
@@ -58,3 +59,5 @@ let picsso = {
 picsso = { ...picsso, ...upperCaseObjectKeys(picsso) };
 
 export default picsso;
+
+export declare interface PicssoDefaultConfigType extends PDCT {}

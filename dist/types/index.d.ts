@@ -68,7 +68,7 @@ type PicssoBorderConfigType = {
   bl?: string;
 };
 
-declare interface PicssoDefaultConfigType
+interface PicssoDefaultConfigType
   extends PicssoMarginConfigType,
     PicssoPaddingConfigType,
     PicssoSizeConfigType,

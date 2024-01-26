@@ -5,7 +5,7 @@ import { PicssoSizeConfigType } from "./size";
 import { PicssoBorderConfigType } from "./border";
 import { numStr } from "./common";
 
-declare interface PicssoDefaultConfigType
+interface PicssoDefaultConfigType
   extends PicssoMarginConfigType,
     PicssoPaddingConfigType,
     PicssoSizeConfigType,
