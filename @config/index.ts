@@ -1,20 +1,10 @@
 import { toPixel } from "../../react-picsso/module/toPixel";
 import { PicssoConfigKeyType, numStr } from "../../react-picsso/types.d";
-import PicssoBorderConfig, {
-  PicssoBorderConfigType,
-} from "../../react-picsso/@config/border";
-import PicssoColorConfig, {
-  PicssoColorConfigType,
-} from "../../react-picsso/@config/color";
-import PicssoMarginConfig, {
-  PicssoMarginConfigType,
-} from "../../react-picsso/@config/margin";
-import PicssoPaddingConfig, {
-  PicssoPaddingConfigType,
-} from "../../react-picsso/@config/padding";
-import PicssoSizeConfig, {
-  PicssoSizeConfigType,
-} from "../../react-picsso/@config/size";
+import PicssoBorderConfig from "../../react-picsso/@config/border";
+import PicssoColorConfig from "../../react-picsso/@config/color";
+import PicssoMarginConfig from "../../react-picsso/@config/margin";
+import PicssoPaddingConfig from "../../react-picsso/@config/padding";
+import PicssoSizeConfig from "../../react-picsso/@config/size";
 
 const picssoDefaultConfig = {
   ...PicssoBorderConfig,
@@ -60,32 +50,3 @@ const picssoDefaultConfig = {
 } as PicssoConfigKeyType;
 
 export default picssoDefaultConfig;
-
-export interface PicssoDefaultConfigType
-  extends PicssoMarginConfigType,
-    PicssoPaddingConfigType,
-    PicssoSizeConfigType,
-    PicssoBorderConfigType,
-    PicssoColorConfigType {
-  jc?: boolean;
-  ac?: boolean;
-  flex?: boolean;
-  overflow?: string;
-  overflowX?: string;
-  overflowY?: string;
-  none?: boolean;
-  gap?: numStr;
-  flexDirection?: string;
-  column?: boolean;
-  col?: boolean;
-  row?: boolean;
-  position?: string;
-  ellipsis?: boolean;
-  pointer?: boolean;
-  textAlign?: string;
-  between?: boolean;
-  fontSize?: numStr;
-  fs?: numStr;
-  fontWeight?: numStr;
-  fw?: numStr;
-}

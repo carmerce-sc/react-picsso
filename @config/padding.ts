@@ -49,20 +49,3 @@ export default {
     getValue: (paddingLeft: numStr) => `padding-left:${toPixel(paddingLeft)};`,
   },
 } as PicssoConfigKeyType;
-
-export type PicssoPaddingConfigType = {
-  padding?: numStr;
-  p?: numStr;
-  paddingX?: numStr;
-  px?: numStr;
-  paddingY?: numStr;
-  py?: numStr;
-  paddingTop?: numStr;
-  pt?: numStr;
-  paddingRight?: numStr;
-  pr?: numStr;
-  paddingBottom?: numStr;
-  pb?: numStr;
-  paddingLeft?: numStr;
-  pl?: numStr;
-};
