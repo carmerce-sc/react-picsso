@@ -1,5 +1,5 @@
 import picssoDefaultConfig from "../@config";
-import { PicssoConfigKeyType } from "../types";
+import { PicssoConfigKeyType } from "../@config/types/common";
 
 export default function generateStyleString(
   props: PicssoConfigKeyType,

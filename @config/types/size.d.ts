@@ -1,6 +1,6 @@
-import { numStr } from "../../types";
+import { numStr } from "./common";
 
-type PicssoSizeConfigType = {
+export type PicssoSizeConfigType = {
   width?: numStr;
   w?: numStr;
   height?: numStr;
@@ -13,5 +13,3 @@ type PicssoSizeConfigType = {
   minWidth?: numStr;
   minHeight?: numStr;
 };
-
-export default PicssoSizeConfigType;

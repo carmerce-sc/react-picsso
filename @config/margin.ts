@@ -1,4 +1,4 @@
-import { PicssoConfigKeyType, numStr } from "../types.d";
+import { PicssoConfigKeyType, numStr } from "./types/common";
 import { toPixel } from "../module/toPixel";
 
 export default {

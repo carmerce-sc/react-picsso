@@ -1,4 +1,4 @@
-import { PicssoConfigKeyType } from "../types.d";
+import { PicssoConfigKeyType } from "./types/common";
 
 export default {
   background: { getValue: (background: string) => `background:${background};` },

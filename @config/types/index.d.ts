@@ -1,11 +1,11 @@
-import PicssoMarginConfigType from "./margin";
-import PicssoPaddingConfigType from "./padding";
-import PicssoSizeConfigType from "./size";
-import PicssoBorderConfigType from "./border";
-import PicssoColorConfigType from "./color";
-import { numStr } from "../../types";
+import { PicssoColorConfigType } from "./color";
+import { PicssoMarginConfigType } from "./margin";
+import { PicssoPaddingConfigType } from "./padding";
+import { PicssoSizeConfigType } from "./size";
+import { PicssoBorderConfigType } from "./border";
+import { numStr } from "./common";
 
-interface PicssoDefaultConfigType
+declare interface PicssoDefaultConfigType
   extends PicssoMarginConfigType,
     PicssoPaddingConfigType,
     PicssoSizeConfigType,
