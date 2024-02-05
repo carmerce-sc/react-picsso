@@ -1,7 +1,7 @@
-import { toPixel } from "../module/toPixel";
+import { toPixel } from "../src/module/toPixel";
 import { PicssoConfigKeyType, numStr } from "./types/common";
 
-export default {
+const size = {
   width: { getValue: (width: numStr) => `width:${toPixel(width)};` },
   w: { getValue: (width: numStr) => `width:${toPixel(width)};` },
   height: { getValue: (height: numStr) => `height:${toPixel(height)};` },
@@ -19,3 +19,5 @@ export default {
   minWidth: { getValue: (minWidth: numStr) => `min-width:${minWidth};` },
   minHeight: { getValue: (minWidth: numStr) => `min-height:${minWidth};` },
 } as PicssoConfigKeyType;
+
+export default size;

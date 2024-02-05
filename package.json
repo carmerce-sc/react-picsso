@@ -1,19 +1,24 @@
 {
   "name": "react-picsso",
-  "version": "0.0.7",
+  "version": "0.0.70",
   "description": "",
   "main": "./dist/bundle.cjs.js",
   "module": "./dist/bundle.esm.js",
-  "types": "./types/index.d.ts",
+  "types": "./dist/types/index.d.ts",
+  "browser": {
+    "./dist/bundle.cjs.js": "./dist/bundle.cjs.js",
+    "./dist/bundle.esm.js": "./dist/bundle.esm.js"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./dist/bundle.cjs.js",
+      "import": "./dist/bundle.esm.js"
+    }
+  },
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -cw"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/bundle.esm.js",
-      "require": "./dist/bundle.cjs.js"
-    }
   },
   "author": "Handle Corp, Jaeyeon Kim <jykim@carmerce.co.kr>",
   "repository": {
@@ -30,22 +35,29 @@
     "@rollup/plugin-commonjs": "25.0.7",
     "@rollup/plugin-node-resolve": "15.2.3",
     "@rollup/plugin-typescript": "11.1.6",
-    "@types/node": "20.11.5",
-    "@types/react": "18.2.48",
     "postcss": "8.4.33",
     "rollup": "4.9.6",
     "rollup-plugin-dts": "6.1.0",
     "rollup-plugin-peer-deps-external": "2.2.4",
     "rollup-plugin-postcss": "4.0.2",
     "rollup-plugin-terser": "7.0.2",
-    "tslib": "2.6.2",
-    "typescript": "5.3.3"
+    "@types/node": "^20.11.5",
+    "@types/react": "^18.2.48",
+    "tslib": "^2.6.2",
+    "typescript": "^4.9"
   },
   "peerDependencies": {
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
-  "type": "module",
   "dependencies": {
-  }
+  },
+  "keywords": [
+    "react",
+    "css-in-js",
+    "react-picsso",
+    "picsso",
+    "handle",
+    "carmerce"
+  ]
 }

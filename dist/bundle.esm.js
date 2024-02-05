@@ -1,2 +1,512 @@
-import t from"react";var n=function(){return n=Object.assign||function(t){for(var n,e=1,r=arguments.length;e<r;e++)for(var o in n=arguments[e])Object.prototype.hasOwnProperty.call(n,o)&&(t[o]=n[o]);return t},n.apply(this,arguments)};function e(t){return"number"==typeof t?"".concat(t,"px"):t}"function"==typeof SuppressedError&&SuppressedError;var r={margin:{getValue:function(t){return"margin:".concat(e(t),";")}},m:{getValue:function(t){return"margin:".concat(e(t),";")}},marginX:{getValue:function(t){return"margin-left:".concat(e(t),";margin-right:").concat(e(t),";")}},mx:{getValue:function(t){return"margin-left:".concat(e(t),";margin-right:").concat(e(t),";")}},marginY:{getValue:function(t){return"margin-top:".concat(e(t),";margin-bottom:").concat(e(t),";")}},my:{getValue:function(t){return"margin-top:".concat(e(t),";margin-bottom:").concat(e(t),";")}},marginTop:{getValue:function(t){return"margin-top:".concat(e(t),";")}},mt:{getValue:function(t){return"margin-top:".concat(e(t),";")}},marginRight:{getValue:function(t){return"margin-right:".concat(e(t),";")}},mr:{getValue:function(t){return"margin-right:".concat(e(t),";")}},marginBottom:{getValue:function(t){return"margin-bottom:".concat(e(t),";")}},mb:{getValue:function(t){return"margin-bottom:".concat(e(t),";")}},marginLeft:{getValue:function(t){return"margin-left:".concat(e(t),";")}},ml:{getValue:function(t){return"margin-left:".concat(e(t),";")}}},o={padding:{getValue:function(t){return"padding:".concat(e(t),";")}},p:{getValue:function(t){return"padding:".concat(e(t),";")}},paddingX:{getValue:function(t){return"padding-left:".concat(e(t),";padding-right:").concat(e(t),";")}},px:{getValue:function(t){return"padding-left:".concat(e(t),";padding-right:").concat(e(t),";")}},paddingY:{getValue:function(t){return"padding-top:".concat(e(t),";padding-bottom:").concat(e(t),";")}},py:{getValue:function(t){return"padding-top:".concat(e(t),";padding-bottom:").concat(e(t),";")}},paddingTop:{getValue:function(t){return"padding-top:".concat(e(t),";")}},pt:{getValue:function(t){return"padding-top:".concat(e(t),";")}},paddingRight:{getValue:function(t){return"padding-right:".concat(e(t),";")}},pr:{getValue:function(t){return"padding-right:".concat(e(t),";")}},paddingBottom:{getValue:function(t){return"padding-bottom:".concat(e(t),";")}},pb:{getValue:function(t){return"padding-bottom:".concat(e(t),";")}},paddingLeft:{getValue:function(t){return"padding-left:".concat(e(t),";")}},pl:{getValue:function(t){return"padding-left:".concat(e(t),";")}}},c={width:{getValue:function(t){return"width:".concat(e(t),";")}},w:{getValue:function(t){return"width:".concat(e(t),";")}},height:{getValue:function(t){return"height:".concat(e(t),";")}},h:{getValue:function(t){return"height:".concat(e(t),";")}},size:{getValue:function(t){return"width: ".concat(Array.isArray(t)?e(t[0]):e(t),"; height: ").concat(Array.isArray(t)?e(t[1]):e(t),";")}},fullP:{getValue:function(){return"width:100%; height:100%;"}},fullV:{getValue:function(){return"width:100vw; height:100vh;"}},maxWidth:{getValue:function(t){return"max-width:".concat(t,";")}},maxHeight:{getValue:function(t){return"max-height:".concat(t,";")}},minWidth:{getValue:function(t){return"min-width:".concat(t,";")}},minHeight:{getValue:function(t){return"min-height:".concat(t,";")}}},a=n(n(n(n(n(n({},{border:{getValue:function(t){return"border:".concat(t,";")}},borderRadius:{getValue:function(t){return"border-radius:".concat(e(t),";")}},borderTop:{getValue:function(t){return"border-top:".concat(t,";")}},bt:{getValue:function(t){return"border-top:".concat(t,";")}},borderRight:{getValue:function(t){return"border-right:".concat(t,";")}},br:{getValue:function(t){return"border-right:".concat(t,";")}},borderBottom:{getValue:function(t){return"border-bottom:".concat(t,";")}},bb:{getValue:function(t){return"border-bottom:".concat(t,";")}},borderLeft:{getValue:function(t){return"border-left:".concat(t,";")}},bl:{getValue:function(t){return"border-left:".concat(t,";")}}}),{background:{getValue:function(t){return"background:".concat(t,";")}},backgroundColor:{getValue:function(t){return"background-color:".concat(t,";")}},bg:{getValue:function(t){return"background:".concat(t,";")}},color:{getValue:function(t){return"color:".concat(t,";")}}}),r),o),c),{jc:{getValue:function(){return"display:flex; justify-content:center;"}},ac:{getValue:function(){return"display:flex; align-items:center;"}},flex:{getValue:function(){return"display:flex;"}},overflow:{getValue:function(t){return"overflow:".concat(t,";")}},overflowX:{getValue:function(t){return"overflow-x:".concat(t,";")}},overflowY:{getValue:function(t){return"overflow-y:".concat(t,";")}},none:{getValue:function(){return"display:none;"}},gap:{getValue:function(t){return"gap:".concat(e(t),";")}},flexDirection:{getValue:function(t){return"flex-direction:".concat(t,";")}},column:{getValue:function(){return"flex-direction:column;"}},col:{getValue:function(){return"flex-direction:column;"}},row:{getValue:function(){return"flex-direction:row;"}},position:{getValue:function(t){return"position:".concat(t,";")}},ellipsis:{getValue:function(){return"text-overflow:ellipsis; overflow:hidden; white-space:nowrap;"}},pointer:{getValue:function(){return"cursor: pointer;"}},textAlign:{getValue:function(t){return"text-align:".concat(t,";")}},between:{getValue:function(){return"justify-content:space-between;"}},fontSize:{getValue:function(t){return"font-size:".concat(e(t),";")}},fs:{getValue:function(t){return"font-size:".concat(e(t),";")}},fontWeight:{getValue:function(t){return"font-weight:".concat(t,";")}},fw:{getValue:function(t){return"font-weight:".concat(t,";")}}});var u=function(t){var n={};return t.split(";").forEach((function(t){var e=t.split(":").map((function(t){return t.trim()})),r=e[0],o=e[1];if(r&&o){var c=r.replace(/-([a-z])/g,(function(t){return t[1].toUpperCase()}));n[c]=o}})),n};function i(e){return function(r){var o,c=r.children,i=r.customConfig,l=function(t,n){var e={};for(var r in t)Object.prototype.hasOwnProperty.call(t,r)&&n.indexOf(r)<0&&(e[r]=t[r]);if(null!=t&&"function"==typeof Object.getOwnPropertySymbols){var o=0;for(r=Object.getOwnPropertySymbols(t);o<r.length;o++)n.indexOf(r[o])<0&&Object.prototype.propertyIsEnumerable.call(t,r[o])&&(e[r[o]]=t[r[o]])}return e}(r,["children","customConfig"]),g=(o=e,function(e){return function(r){return t.createElement(o,n({},r,{style:u(e)}))}})(function(t,e){var r=Object.keys(t),o=n(n({},e),a),c=Object.keys(o),u=r.map((function(n,e){return n in t&&c.includes(n)?r[e]:void 0})).filter((function(t){return void 0!==t})).map((function(n){var e;return null===(e=null==o?void 0:o[n])||void 0===e?void 0:e.getValue(t[n])})).join(" ");return Array.from(new Set(u.split(" "))).join(" ")}(l,i));return t.createElement(g,null,c)}}var l,g,f={html:i("html"),body:i("body"),div:i("div"),span:i("span"),header:i("header"),footer:i("footer"),section:i("section"),article:i("article"),nav:i("nav"),aside:i("aside"),h1:i("h1"),h2:i("h2"),h3:i("h3"),h4:i("h4"),h5:i("h5"),h6:i("h6"),p:i("p"),ul:i("ul"),ol:i("ol"),li:i("li"),table:i("table"),tr:i("tr"),td:i("td"),th:i("th"),form:i("form"),button:i("button"),a:i("a"),strong:i("strong"),em:i("em"),b:i("b"),i:i("i"),blockquote:i("blockquote"),canvas:i("canvas"),iframe:i("iframe"),br:i("br"),hr:i("hr"),img:i("img"),input:i("input"),link:i("link"),meta:i("meta"),area:i("area"),base:i("base"),col:i("col"),command:i("command"),embed:i("embed"),keygen:i("keygen"),param:i("param"),source:i("source"),track:i("track"),wbr:i("wbr")},d=f=n(n({},f),(l=f,g={},Object.keys(l).forEach((function(t){var n,e=(n=t).charAt(0).toUpperCase()+n.slice(1);g[e]=l[t]})),g));export{d as default};
-//# sourceMappingURL=bundle.esm.js.map
+import React from 'react';
+
+/******************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise, SuppressedError, Symbol */
+
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+
+function __rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+    var e = new Error(message);
+    return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+};
+
+function toPixel(value) {
+  return typeof value === "number" ? "".concat(value, "px") : value;
+}
+
+var border = {
+  border: {
+    getValue: function getValue(border) {
+      return "border:".concat(border, ";");
+    }
+  },
+  borderRadius: {
+    getValue: function getValue(borderRadius) {
+      return "border-radius:".concat(toPixel(borderRadius), ";");
+    }
+  },
+  borderTop: {
+    getValue: function getValue(borderTop) {
+      return "border-top:".concat(borderTop, ";");
+    }
+  },
+  bt: {
+    getValue: function getValue(borderTop) {
+      return "border-top:".concat(borderTop, ";");
+    }
+  },
+  borderRight: {
+    getValue: function getValue(borderRight) {
+      return "border-right:".concat(borderRight, ";");
+    }
+  },
+  br: {
+    getValue: function getValue(borderRight) {
+      return "border-right:".concat(borderRight, ";");
+    }
+  },
+  borderBottom: {
+    getValue: function getValue(borderBottom) {
+      return "border-bottom:".concat(borderBottom, ";");
+    }
+  },
+  bb: {
+    getValue: function getValue(borderBottom) {
+      return "border-bottom:".concat(borderBottom, ";");
+    }
+  },
+  borderLeft: {
+    getValue: function getValue(borderLeft) {
+      return "border-left:".concat(borderLeft, ";");
+    }
+  },
+  bl: {
+    getValue: function getValue(borderLeft) {
+      return "border-left:".concat(borderLeft, ";");
+    }
+  }
+};
+
+var color = {
+  background: {
+    getValue: function getValue(background) {
+      return "background:".concat(background, ";");
+    }
+  },
+  backgroundColor: {
+    getValue: function getValue(backgroundColor) {
+      return "background-color:".concat(backgroundColor, ";");
+    }
+  },
+  bg: {
+    getValue: function getValue(background) {
+      return "background:".concat(background, ";");
+    }
+  },
+  color: {
+    getValue: function getValue(color) {
+      return "color:".concat(color, ";");
+    }
+  }
+};
+
+var margin = {
+  margin: {
+    getValue: function getValue(margin) {
+      return "margin:".concat(toPixel(margin), ";");
+    }
+  },
+  m: {
+    getValue: function getValue(margin) {
+      return "margin:".concat(toPixel(margin), ";");
+    }
+  },
+  marginX: {
+    getValue: function getValue(marginX) {
+      return "margin-left:".concat(toPixel(marginX), ";margin-right:").concat(toPixel(marginX), ";");
+    }
+  },
+  mx: {
+    getValue: function getValue(marginX) {
+      return "margin-left:".concat(toPixel(marginX), ";margin-right:").concat(toPixel(marginX), ";");
+    }
+  },
+  marginY: {
+    getValue: function getValue(marginY) {
+      return "margin-top:".concat(toPixel(marginY), ";margin-bottom:").concat(toPixel(marginY), ";");
+    }
+  },
+  my: {
+    getValue: function getValue(marginY) {
+      return "margin-top:".concat(toPixel(marginY), ";margin-bottom:").concat(toPixel(marginY), ";");
+    }
+  },
+  marginTop: {
+    getValue: function getValue(marginTop) {
+      return "margin-top:".concat(toPixel(marginTop), ";");
+    }
+  },
+  mt: {
+    getValue: function getValue(marginTop) {
+      return "margin-top:".concat(toPixel(marginTop), ";");
+    }
+  },
+  marginRight: {
+    getValue: function getValue(marginRight) {
+      return "margin-right:".concat(toPixel(marginRight), ";");
+    }
+  },
+  mr: {
+    getValue: function getValue(marginRight) {
+      return "margin-right:".concat(toPixel(marginRight), ";");
+    }
+  },
+  marginBottom: {
+    getValue: function getValue(marginBottom) {
+      return "margin-bottom:".concat(toPixel(marginBottom), ";");
+    }
+  },
+  mb: {
+    getValue: function getValue(marginBottom) {
+      return "margin-bottom:".concat(toPixel(marginBottom), ";");
+    }
+  },
+  marginLeft: {
+    getValue: function getValue(marginLeft) {
+      return "margin-left:".concat(toPixel(marginLeft), ";");
+    }
+  },
+  ml: {
+    getValue: function getValue(marginLeft) {
+      return "margin-left:".concat(toPixel(marginLeft), ";");
+    }
+  }
+};
+
+var padding = {
+  padding: {
+    getValue: function getValue(padding) {
+      return "padding:".concat(toPixel(padding), ";");
+    }
+  },
+  p: {
+    getValue: function getValue(padding) {
+      return "padding:".concat(toPixel(padding), ";");
+    }
+  },
+  paddingX: {
+    getValue: function getValue(paddingX) {
+      return "padding-left:".concat(toPixel(paddingX), ";padding-right:").concat(toPixel(paddingX), ";");
+    }
+  },
+  px: {
+    getValue: function getValue(paddingX) {
+      return "padding-left:".concat(toPixel(paddingX), ";padding-right:").concat(toPixel(paddingX), ";");
+    }
+  },
+  paddingY: {
+    getValue: function getValue(paddingY) {
+      return "padding-top:".concat(toPixel(paddingY), ";padding-bottom:").concat(toPixel(paddingY), ";");
+    }
+  },
+  py: {
+    getValue: function getValue(paddingY) {
+      return "padding-top:".concat(toPixel(paddingY), ";padding-bottom:").concat(toPixel(paddingY), ";");
+    }
+  },
+  paddingTop: {
+    getValue: function getValue(paddingTop) {
+      return "padding-top:".concat(toPixel(paddingTop), ";");
+    }
+  },
+  pt: {
+    getValue: function getValue(paddingTop) {
+      return "padding-top:".concat(toPixel(paddingTop), ";");
+    }
+  },
+  paddingRight: {
+    getValue: function getValue(paddingRight) {
+      return "padding-right:".concat(toPixel(paddingRight), ";");
+    }
+  },
+  pr: {
+    getValue: function getValue(paddingRight) {
+      return "padding-right:".concat(toPixel(paddingRight), ";");
+    }
+  },
+  paddingBottom: {
+    getValue: function getValue(paddingBottom) {
+      return "padding-bottom:".concat(toPixel(paddingBottom), ";");
+    }
+  },
+  pb: {
+    getValue: function getValue(paddingBottom) {
+      return "padding-bottom:".concat(toPixel(paddingBottom), ";");
+    }
+  },
+  paddingLeft: {
+    getValue: function getValue(paddingLeft) {
+      return "padding-left:".concat(toPixel(paddingLeft), ";");
+    }
+  },
+  pl: {
+    getValue: function getValue(paddingLeft) {
+      return "padding-left:".concat(toPixel(paddingLeft), ";");
+    }
+  }
+};
+
+var size = {
+  width: {
+    getValue: function getValue(width) {
+      return "width:".concat(toPixel(width), ";");
+    }
+  },
+  w: {
+    getValue: function getValue(width) {
+      return "width:".concat(toPixel(width), ";");
+    }
+  },
+  height: {
+    getValue: function getValue(height) {
+      return "height:".concat(toPixel(height), ";");
+    }
+  },
+  h: {
+    getValue: function getValue(height) {
+      return "height:".concat(toPixel(height), ";");
+    }
+  },
+  size: {
+    getValue: function getValue(size) {
+      return "width: ".concat(Array.isArray(size) ? toPixel(size[0]) : toPixel(size), "; height: ").concat(Array.isArray(size) ? toPixel(size[1]) : toPixel(size), ";");
+    }
+  },
+  fullP: {
+    getValue: function getValue() {
+      return "width:100%; height:100%;";
+    }
+  },
+  fullV: {
+    getValue: function getValue() {
+      return "width:100vw; height:100vh;";
+    }
+  },
+  maxWidth: {
+    getValue: function getValue(maxWidth) {
+      return "max-width:".concat(maxWidth, ";");
+    }
+  },
+  maxHeight: {
+    getValue: function getValue(maxHeight) {
+      return "max-height:".concat(maxHeight, ";");
+    }
+  },
+  minWidth: {
+    getValue: function getValue(minWidth) {
+      return "min-width:".concat(minWidth, ";");
+    }
+  },
+  minHeight: {
+    getValue: function getValue(minWidth) {
+      return "min-height:".concat(minWidth, ";");
+    }
+  }
+};
+
+var picssoDefaultConfig = __assign(__assign(__assign(__assign(__assign(__assign({}, border), color), margin), padding), size), {
+  jc: {
+    getValue: function getValue() {
+      return "display:flex; justify-content:center;";
+    }
+  },
+  ac: {
+    getValue: function getValue() {
+      return "display:flex; align-items:center;";
+    }
+  },
+  flex: {
+    getValue: function getValue() {
+      return "display:flex;";
+    }
+  },
+  overflow: {
+    getValue: function getValue(overflow) {
+      return "overflow:".concat(overflow, ";");
+    }
+  },
+  overflowX: {
+    getValue: function getValue(overflowX) {
+      return "overflow-x:".concat(overflowX, ";");
+    }
+  },
+  overflowY: {
+    getValue: function getValue(overflowY) {
+      return "overflow-y:".concat(overflowY, ";");
+    }
+  },
+  none: {
+    getValue: function getValue() {
+      return "display:none;";
+    }
+  },
+  gap: {
+    getValue: function getValue(margin) {
+      return "gap:".concat(toPixel(margin), ";");
+    }
+  },
+  flexDirection: {
+    getValue: function getValue(flexDirection) {
+      return "flex-direction:".concat(flexDirection, ";");
+    }
+  },
+  column: {
+    getValue: function getValue() {
+      return "flex-direction:column;";
+    }
+  },
+  col: {
+    getValue: function getValue() {
+      return "flex-direction:column;";
+    }
+  },
+  row: {
+    getValue: function getValue() {
+      return "flex-direction:row;";
+    }
+  },
+  position: {
+    getValue: function getValue(position) {
+      return "position:".concat(position, ";");
+    }
+  },
+  ellipsis: {
+    getValue: function getValue() {
+      return "text-overflow:ellipsis; overflow:hidden; white-space:nowrap;";
+    }
+  },
+  pointer: {
+    getValue: function getValue() {
+      return "cursor: pointer;";
+    }
+  },
+  textAlign: {
+    getValue: function getValue(textAlign) {
+      return "text-align:".concat(textAlign, ";");
+    }
+  },
+  between: {
+    getValue: function getValue() {
+      return "justify-content:space-between;";
+    }
+  },
+  fontSize: {
+    getValue: function getValue(fontSize) {
+      return "font-size:".concat(toPixel(fontSize), ";");
+    }
+  },
+  fs: {
+    getValue: function getValue(fontSize) {
+      return "font-size:".concat(toPixel(fontSize), ";");
+    }
+  },
+  fontWeight: {
+    getValue: function getValue(fontWeight) {
+      return "font-weight:".concat(fontWeight, ";");
+    }
+  },
+  fw: {
+    getValue: function getValue(fontWeight) {
+      return "font-weight:".concat(fontWeight, ";");
+    }
+  }
+});
+
+function generateStyleString(props, customConfig) {
+  var totalKeys = Object.keys(props);
+  var targetConfig = __assign(__assign({}, customConfig), picssoDefaultConfig);
+  var piccsoConfigKeys = Object.keys(targetConfig);
+  var targetPropsKeys = totalKeys.map(function (prop, i) {
+    return prop in props && piccsoConfigKeys.includes(prop) ? totalKeys[i] : undefined;
+  }).filter(function (el) {
+    return el !== undefined;
+  });
+  var styleProps = targetPropsKeys.map(function (key) {
+    var _a;
+    return (_a = targetConfig === null || targetConfig === void 0 ? void 0 : targetConfig[key]) === null || _a === void 0 ? void 0 : _a.getValue(props[key]);
+  });
+  var styleString = styleProps.join(" ");
+  var stylePropsArray = Array.from(new Set(styleString.split(" ")));
+  var formattedStyle = stylePropsArray.join(" "); // e.g. display:flex; justify-content:center; overflow-x:hidden;
+  return formattedStyle;
+}
+
+var styleCache = new Map();
+var camelStyle = function camelStyle(styleString) {
+  var cachedStyle = styleCache.get(styleString);
+  if (cachedStyle) {
+    return cachedStyle;
+  }
+  var tempStyleObject = {};
+  styleString.split(";").forEach(function (styleProperty) {
+    var _a = styleProperty.split(":").map(function (item) {
+        return item.trim();
+      }),
+      key = _a[0],
+      value = _a[1];
+    if (key && value) {
+      var formattedKey = key.replace(/-([a-z])/g, function (g) {
+        return g[1].toUpperCase();
+      });
+      tempStyleObject[formattedKey] = value;
+    }
+  });
+  var camelCaseStyle = tempStyleObject;
+  styleCache.set(styleString, camelCaseStyle);
+  return camelCaseStyle;
+};
+var picssoStyled = function picssoStyled(Component) {
+  return function (styleString) {
+    return function (props) {
+      var camelCaseStyle = camelStyle(styleString);
+      return /*#__PURE__*/React.createElement(Component, __assign({}, props, {
+        style: camelCaseStyle
+      }));
+    };
+  };
+};
+
+function createStyledElement(tagName) {
+  return function (_a) {
+    var children = _a.children,
+      customConfig = _a.customConfig,
+      props = __rest(_a, ["children", "customConfig"]);
+    var HTMLTag = picssoStyled(tagName)(generateStyleString(props, customConfig));
+    return /*#__PURE__*/React.createElement(HTMLTag, null, children);
+  };
+}
+
+var htmlTags = ["a", "abbr", "address", "area", "article", "aside", "audio", "b", "base", "bdi", "bdo", "big", "blockquote", "body", "br", "button", "canvas", "caption", "center", "cite", "code", "col", "colgroup", "data", "datalist", "dd", "del", "details", "dfn", "dialog", "div", "dl", "dt", "em", "embed", "fieldset", "figcaption", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "head", "header", "hgroup", "hr", "html", "i", "iframe", "img", "input", "ins", "kbd", "keygen", "label", "legend", "li", "link", "main", "map", "mark", "menu", "menuitem", "meta", "meter", "nav", "noindex", "noscript", "object", "ol", "optgroup", "option", "output", "p", "param", "picture", "pre", "progress", "q", "rp", "rt", "ruby", "s", "samp", "search", "slot", "script", "section", "select", "small", "source", "span", "strong", "style", "sub", "summary", "sup", "table", "template", "tbody", "td", "textarea", "tfoot", "th", "thead", "time", "title", "tr", "track", "u", "ul", "var", "video", "wbr", "webview", "svg", "animate", "animateMotion", "animateTransform", "circle", "clipPath", "defs", "desc", "ellipse", "feBlend", "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feDropShadow", "feFlood", "feFuncA", "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge", "feMergeNode", "feMorphology", "feOffset", "fePointLight", "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence", "filter", "foreignObject", "g", "image", "line", "linearGradient", "marker", "mask", "metadata", "mpath", "path", "pattern", "polygon", "polyline", "radialGradient", "rect", "stop", "switch", "symbol", "text", "textPath", "tspan", "use", "view"];
+
+var picsso = htmlTags.reduce(function (acc, htmlKey) {
+  acc[htmlKey] = createStyledElement(htmlKey);
+  return acc;
+}, {});
+// export interface PicssoDefaultConfigType extends PDCT {}
+
+export { picsso as default };
