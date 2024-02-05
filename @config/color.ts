@@ -1,6 +1,6 @@
 import { PicssoConfigKeyType } from "./types/common";
 
-export default {
+const color = {
   background: { getValue: (background: string) => `background:${background};` },
   backgroundColor: {
     getValue: (backgroundColor: string) =>
@@ -9,3 +9,5 @@ export default {
   bg: { getValue: (background: string) => `background:${background};` },
   color: { getValue: (color: string) => `color:${color};` },
 } as PicssoConfigKeyType;
+
+export default color;

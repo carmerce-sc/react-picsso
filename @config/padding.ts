@@ -1,7 +1,7 @@
-import { toPixel } from "../module/toPixel";
+import { toPixel } from "../src/module/toPixel";
 import { PicssoConfigKeyType, numStr } from "./types/common";
 
-export default {
+const padding = {
   padding: { getValue: (padding: numStr) => `padding:${toPixel(padding)};` },
   p: { getValue: (padding: numStr) => `padding:${toPixel(padding)};` },
   paddingX: {
@@ -49,3 +49,5 @@ export default {
     getValue: (paddingLeft: numStr) => `padding-left:${toPixel(paddingLeft)};`,
   },
 } as PicssoConfigKeyType;
+
+export default padding;

@@ -1,7 +1,7 @@
-import { toPixel } from "../module/toPixel";
+import { toPixel } from "../src/module/toPixel";
 import { PicssoConfigKeyType, numStr } from "./types/common";
 
-export default {
+const border = {
   border: { getValue: (border: string) => `border:${border};` },
   borderRadius: {
     getValue: (borderRadius: numStr) =>
@@ -22,3 +22,5 @@ export default {
   },
   bl: { getValue: (borderLeft: numStr) => `border-left:${borderLeft};` },
 } as PicssoConfigKeyType;
+
+export default border;

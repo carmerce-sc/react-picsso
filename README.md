@@ -26,9 +26,9 @@ import customConfig from "../picsso.config";{/** option, if you want to set your
 
 const MyWrapper = ({ children, ...props }) => {
   return (
-    <picsso.Div {...props} customConfig={customConfig}{/** option, if you want to set your own configurations. # See custom configuration below. */}>
+    <picsso.div {...props} customConfig={customConfig}{/** option, if you want to set your own configurations. # See custom configuration below. */}>
       {children}
-    </picsso.Div>
+    </picsso.div>
   );
 };
 
@@ -58,7 +58,7 @@ export default App;
 
 For TypeScript users, here's how you can integrate React-Picsso with type support:
 
-```typescript
+```javascript
 import picsso from "react-picsso";
 import { PicssoDefaultConfigType } from "react-picsso/@config";
 import customConfig, { PicssoCustomConfigType } from "../picsso.config";{/** option, if you want to set your own configurations. # See custom configuration below. */}
@@ -71,12 +71,12 @@ interface MyComponentType
 
 export default function MyWrapper({ children, ...props }: MyComponentType) {
   return (
-    <picsso.Div
+    <picsso.div
       {...(props as PicssoDefaultConfigType)}
       customConfig={customConfig}{/** option, if you want to set your own configurations. # See custom configuration below. */}
     >
       {children}
-    </picsso.Div>
+    </picsso.div>
   );
 }
 ```
@@ -99,13 +99,13 @@ TypeScript:
 
 picsso.config.ts
 
-```typescript
+```javascript
 export default {
   yourRedBorder: { getValue: () => "border: 2px dotted red;" },
 };
 
 export type PicssoCustomConfigType = {
-  yourRedBorder?: boolean;
+  yourRedBorder?: boolean,
 };
 ```
 

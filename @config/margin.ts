@@ -1,7 +1,6 @@
 import { PicssoConfigKeyType, numStr } from "./types/common";
-import { toPixel } from "../module/toPixel";
-
-export default {
+import { toPixel } from "../src/module/toPixel";
+const margin = {
   margin: { getValue: (margin: numStr) => `margin:${toPixel(margin)};` },
   m: { getValue: (margin: numStr) => `margin:${toPixel(margin)};` },
   marginX: {
@@ -45,3 +44,5 @@ export default {
     getValue: (marginLeft: numStr) => `margin-left:${toPixel(marginLeft)};`,
   },
 } as PicssoConfigKeyType;
+
+export default margin;
