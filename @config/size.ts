@@ -7,7 +7,7 @@ const size = {
   height: { getValue: (height: numStr) => `height:${toPixel(height)};` },
   h: { getValue: (height: numStr) => `height:${toPixel(height)};` },
   size: {
-    getValue: (size: numStr) =>
+    getValue: (size: numStr | [numStr, numStr]) =>
       `width: ${
         Array.isArray(size) ? toPixel(size[0]) : toPixel(size)
       }; height: ${Array.isArray(size) ? toPixel(size[1]) : toPixel(size)};`,

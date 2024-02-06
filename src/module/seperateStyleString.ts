@@ -25,8 +25,8 @@ export default function seperateStyleString(
     targetConfig?.[key]?.getValue(props[key])
   );
   const styleString = styleProps.join(" ");
-  const stylePropsArray = Array.from(new Set(styleString.split(" ")));
-  const formattedStyleString: string = stylePropsArray.join(" "); // e.g. display:flex; justify-content:center; overflow-x:hidden;
+  const stylePropsArray = Array.from(new Set(styleString.split(";")));
+  const formattedStyleString: string = stylePropsArray.join(";"); // e.g. display:flex; justify-content:center; overflow-x:hidden;
 
   const otherProps: any = otherPropsKeys.reduce((acc: any, propKey: string) => {
     acc[propKey] = props[propKey];
