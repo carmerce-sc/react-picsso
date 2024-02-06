@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -437,14 +437,18 @@ var picssoDefaultConfig = __assign(__assign(__assign(__assign(__assign(__assign(
   }
 });
 
-function generateStyleString(props, customConfig) {
+function seperateStyleString(props, customConfig) {
   var totalKeys = Object.keys(props);
   var targetConfig = __assign(__assign({}, customConfig), picssoDefaultConfig);
   var piccsoConfigKeys = Object.keys(targetConfig);
-  var targetPropsKeys = totalKeys.map(function (prop, i) {
-    return prop in props && piccsoConfigKeys.includes(prop) ? totalKeys[i] : undefined;
-  }).filter(function (el) {
-    return el !== undefined;
+  var targetPropsKeys = [];
+  var otherPropsKeys = [];
+  totalKeys.forEach(function (prop, i) {
+    if (prop in props && piccsoConfigKeys.includes(prop)) {
+      targetPropsKeys.push(totalKeys[i]);
+    } else {
+      otherPropsKeys.push(prop);
+    }
   });
   var styleProps = targetPropsKeys.map(function (key) {
     var _a;
@@ -452,8 +456,12 @@ function generateStyleString(props, customConfig) {
   });
   var styleString = styleProps.join(" ");
   var stylePropsArray = Array.from(new Set(styleString.split(" ")));
-  var formattedStyle = stylePropsArray.join(" "); // e.g. display:flex; justify-content:center; overflow-x:hidden;
-  return formattedStyle;
+  var formattedStyleString = stylePropsArray.join(" "); // e.g. display:flex; justify-content:center; overflow-x:hidden;
+  var otherProps = otherPropsKeys.reduce(function (acc, propKey) {
+    acc[propKey] = props[propKey];
+    return acc;
+  }, {});
+  return [formattedStyleString, otherProps];
 }
 
 var styleCache = new Map();
@@ -482,23 +490,35 @@ var camelStyle = function camelStyle(styleString) {
 };
 var picssoStyled = function picssoStyled(Component) {
   return function (styleString) {
-    return function (props) {
+    // forwardRef를 사용하여 컴포넌트에 ref를 전달할 수 있도록 수정
+    var StyledComponent = /*#__PURE__*/forwardRef(function (props, ref) {
       var camelCaseStyle = camelStyle(styleString);
-      return /*#__PURE__*/React.createElement(Component, __assign({}, props, {
+      var componentProps = __assign(__assign({}, props), {
         style: camelCaseStyle
-      }));
-    };
+      });
+      // HTML 태그 문자열인 경우
+      return /*#__PURE__*/React.createElement(Component, __assign(__assign({}, componentProps), {
+        ref: ref
+      }), props.children);
+    });
+    StyledComponent.displayName = "Styled(".concat(typeof Component === "string" ? Component : Component.displayName || "Component", ")");
+    return StyledComponent;
   };
 };
 
 function createStyledElement(tagName) {
-  return function (_a) {
+  return /*#__PURE__*/forwardRef(function (_a, ref) {
     var children = _a.children,
       customConfig = _a.customConfig,
       props = __rest(_a, ["children", "customConfig"]);
-    var HTMLTag = picssoStyled(tagName)(generateStyleString(props, customConfig));
-    return /*#__PURE__*/React.createElement(HTMLTag, null, children);
-  };
+    var _b = seperateStyleString(props, customConfig),
+      styleString = _b[0],
+      otherProps = _b[1];
+    var HTMLTag = picssoStyled(tagName)(styleString);
+    return /*#__PURE__*/React.createElement(HTMLTag, __assign({
+      ref: ref
+    }, otherProps), children);
+  });
 }
 
 var htmlTags = ["a", "abbr", "address", "area", "article", "aside", "audio", "b", "base", "bdi", "bdo", "big", "blockquote", "body", "br", "button", "canvas", "caption", "center", "cite", "code", "col", "colgroup", "data", "datalist", "dd", "del", "details", "dfn", "dialog", "div", "dl", "dt", "em", "embed", "fieldset", "figcaption", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "head", "header", "hgroup", "hr", "html", "i", "iframe", "img", "input", "ins", "kbd", "keygen", "label", "legend", "li", "link", "main", "map", "mark", "menu", "menuitem", "meta", "meter", "nav", "noindex", "noscript", "object", "ol", "optgroup", "option", "output", "p", "param", "picture", "pre", "progress", "q", "rp", "rt", "ruby", "s", "samp", "search", "slot", "script", "section", "select", "small", "source", "span", "strong", "style", "sub", "summary", "sup", "table", "template", "tbody", "td", "textarea", "tfoot", "th", "thead", "time", "title", "tr", "track", "u", "ul", "var", "video", "wbr", "webview", "svg", "animate", "animateMotion", "animateTransform", "circle", "clipPath", "defs", "desc", "ellipse", "feBlend", "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feDropShadow", "feFlood", "feFuncA", "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge", "feMergeNode", "feMorphology", "feOffset", "fePointLight", "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence", "filter", "foreignObject", "g", "image", "line", "linearGradient", "marker", "mask", "metadata", "mpath", "path", "pattern", "polygon", "polyline", "radialGradient", "rect", "stop", "switch", "symbol", "text", "textPath", "tspan", "use", "view"];
@@ -507,6 +527,5 @@ var picsso = htmlTags.reduce(function (acc, htmlKey) {
   acc[htmlKey] = createStyledElement(htmlKey);
   return acc;
 }, {});
-// export interface PicssoDefaultConfigType extends PDCT {}
 
 export { picsso as default };

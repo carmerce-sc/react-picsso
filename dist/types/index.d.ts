@@ -1,3 +1,5 @@
+import { ForwardRefExoticComponent, RefAttributes } from 'react';
+
 type PicssoColorConfigType = {
   background?: string;
   backgroundColor?: string;
@@ -20,11 +22,9 @@ interface PicssoProps extends PicssoConfigKeyType {
   [key: string]: any;
 }
 
-type PicssoElementType = ({
-  children,
-  customConfig,
-  ...props
-}: PicssoProps) => React.JSX.Element;
+type PicssoElementType = ForwardRefExoticComponent<
+  PicssoProps & RefAttributes<HTMLElement>
+>;
 
 type PicssoMarginConfigType = {
   margin?: numStr;
@@ -89,35 +89,34 @@ type PicssoBorderConfigType = {
 
 declare const picsso: PicssoElementTypes;
 
-declare module "react-picsso" {
-  export interface PicssoDefaultConfigType
-    extends PicssoMarginConfigType,
-      PicssoPaddingConfigType,
-      PicssoSizeConfigType,
-      PicssoBorderConfigType,
-      PicssoColorConfigType {
-    jc?: boolean;
-    ac?: boolean;
-    flex?: boolean;
-    overflow?: string;
-    overflowX?: string;
-    overflowY?: string;
-    none?: boolean;
-    gap?: numStr;
-    flexDirection?: string;
-    column?: boolean;
-    col?: boolean;
-    row?: boolean;
-    position?: string;
-    ellipsis?: boolean;
-    pointer?: boolean;
-    textAlign?: string;
-    between?: boolean;
-    fontSize?: numStr;
-    fs?: numStr;
-    fontWeight?: numStr;
-    fw?: numStr;
-  }
+declare module "react-picsso" {}
+interface PicssoDefaultConfigType
+  extends PicssoMarginConfigType,
+    PicssoPaddingConfigType,
+    PicssoSizeConfigType,
+    PicssoBorderConfigType,
+    PicssoColorConfigType {
+  jc?: boolean;
+  ac?: boolean;
+  flex?: boolean;
+  overflow?: string;
+  overflowX?: string;
+  overflowY?: string;
+  none?: boolean;
+  gap?: numStr;
+  flexDirection?: string;
+  column?: boolean;
+  col?: boolean;
+  row?: boolean;
+  position?: string;
+  ellipsis?: boolean;
+  pointer?: boolean;
+  textAlign?: string;
+  between?: boolean;
+  fontSize?: numStr;
+  fs?: numStr;
+  fontWeight?: numStr;
+  fw?: numStr;
 }
 
-export { picsso as default };
+export { type PicssoDefaultConfigType, picsso as default };
