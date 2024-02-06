@@ -1,23 +1,25 @@
+// rollup -c
 import babel from "@rollup/plugin-babel";
 import typescript from "@rollup/plugin-typescript";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import { terser } from "rollup-plugin-terser";
 import dts from "rollup-plugin-dts";
+import packageJson from "./package.json" assert { type: "json" };
 
 export default [
   {
     input: "./index.tsx",
     output: [
       {
-        file: "./dist/bundle.cjs.js",
+        file: packageJson.main,
         format: "cjs",
-        sourcemap: true,
+        sourcemap: false,
       },
       {
-        file: "./dist/bundle.esm.js",
+        file: packageJson.module,
         format: "esm",
-        sourcemap: true,
+        sourcemap: false,
       },
     ],
     plugins: [
@@ -32,19 +34,19 @@ export default [
         ],
         extensions: [".js", ".jsx", ".ts", ".tsx"],
       }),
+      nodeResolve(),
+      commonjs({ extensions: [".js", ".ts", ".jsx", ".tsx"] }),
 
       // 타입스크립트
       typescript(),
 
-      nodeResolve(),
-      commonjs({ extensions: [".js", ".ts", ".jsx", ".tsx"] }),
       // 공백제거, 용량 관리
-      terser(),
+      // terser(),
     ],
   },
   {
     input: "./@config/types/index.d.ts",
-    output: [{ file: "dist/types/index.d.ts", format: "es" }],
+    output: [{ file: packageJson.types, format: "es" }],
     plugins: [dts()],
   },
 ];

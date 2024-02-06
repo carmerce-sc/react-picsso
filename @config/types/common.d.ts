@@ -1,5 +1,20 @@
+import { ForwardRefExoticComponent, RefAttributes } from "react";
+
+export declare type PicssoElementTypes = {
+  [Tag in keyof JSX.IntrinsicElements]: PicssoElementType;
+};
+
 export declare type PicssoConfigKeyType = {
-  [key: string]: any;
+  [key: string]: { getValue: (e: any) => string };
 };
 
 export declare type numStr = number | string;
+export interface PicssoProps extends PicssoConfigKeyType {
+  children?: any;
+  customConfig?: any;
+  [key: string]: any;
+}
+
+export type PicssoElementType = ForwardRefExoticComponent<
+  PicssoProps & RefAttributes<HTMLElement>
+>;

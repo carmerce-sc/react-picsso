@@ -1,3 +1,5 @@
+import { ForwardRefExoticComponent, RefAttributes } from 'react';
+
 type PicssoColorConfigType = {
   background?: string;
   backgroundColor?: string;
@@ -5,7 +7,24 @@ type PicssoColorConfigType = {
   color?: string;
 };
 
+declare type PicssoElementTypes = {
+  [Tag in keyof JSX.IntrinsicElements]: PicssoElementType;
+};
+
+declare type PicssoConfigKeyType = {
+  [key: string]: { getValue: (e: any) => string };
+};
+
 declare type numStr = number | string;
+interface PicssoProps extends PicssoConfigKeyType {
+  children?: any;
+  customConfig?: any;
+  [key: string]: any;
+}
+
+type PicssoElementType = ForwardRefExoticComponent<
+  PicssoProps & RefAttributes<HTMLElement>
+>;
 
 type PicssoMarginConfigType = {
   margin?: numStr;
@@ -68,7 +87,10 @@ type PicssoBorderConfigType = {
   bl?: string;
 };
 
-declare interface PicssoDefaultConfigType
+declare const picsso: PicssoElementTypes;
+
+declare module "react-picsso" {}
+interface PicssoDefaultConfigType
   extends PicssoMarginConfigType,
     PicssoPaddingConfigType,
     PicssoSizeConfigType,
@@ -97,4 +119,4 @@ declare interface PicssoDefaultConfigType
   fw?: numStr;
 }
 
-export type { PicssoDefaultConfigType as default };
+export { type PicssoDefaultConfigType, picsso as default };
