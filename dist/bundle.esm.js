@@ -455,8 +455,8 @@ function seperateStyleString(props, customConfig) {
     return (_a = targetConfig === null || targetConfig === void 0 ? void 0 : targetConfig[key]) === null || _a === void 0 ? void 0 : _a.getValue(props[key]);
   });
   var styleString = styleProps.join(" ");
-  var stylePropsArray = Array.from(new Set(styleString.split(" ")));
-  var formattedStyleString = stylePropsArray.join(" "); // e.g. display:flex; justify-content:center; overflow-x:hidden;
+  var stylePropsArray = Array.from(new Set(styleString.split(";")));
+  var formattedStyleString = stylePropsArray.join(";"); // e.g. display:flex; justify-content:center; overflow-x:hidden;
   var otherProps = otherPropsKeys.reduce(function (acc, propKey) {
     acc[propKey] = props[propKey];
     return acc;

@@ -7,7 +7,7 @@ export type PicssoSizeConfigType = {
   height?: numStr;
   /** Equals to height. */
   h?: numStr;
-  size?: numStr | [numStr | numStr];
+  size?: numStr | [numStr, numStr];
   /** Apply 100% to width and height respectively. */
   fullP?: boolean;
   /** Apply 100vw and 100vh to width and height respectively. */
