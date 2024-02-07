@@ -43,3 +43,16 @@ export interface PicssoDefaultConfigType
   /** Equals to font-weight. */
   fw?: numStr;
 }
+
+export { numStr } from "./common";
+
+/**
+ * The css function allows embedding and processing CSS within JavaScript/TypeScript using template literals.
+ */
+export function css(strings: TemplateStringsArray, ...values: string[]): string;
+
+/**
+ * e.g. number 2 -> string "2px"
+ * @param value number or string
+ */
+export function toPixel(value: numStr): string;
