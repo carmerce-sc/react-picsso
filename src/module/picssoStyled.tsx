@@ -28,7 +28,6 @@ const camelStyle = (styleString: string): CSSProperties => {
 const picssoStyled =
   <P extends Record<string, any>>(Component: ComponentType<P> | string) =>
   (styleString: string) => {
-    // forwardRef를 사용하여 컴포넌트에 ref를 전달할 수 있도록 수정
     const StyledComponent = forwardRef<
       HTMLElement,
       P & { ref?: React.Ref<HTMLElement> }

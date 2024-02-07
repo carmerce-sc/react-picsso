@@ -17,9 +17,13 @@ declare type PicssoConfigKeyType = {
 };
 
 declare type numStr = number | string;
-interface PicssoProps extends PicssoConfigKeyType {
+
+interface PicssoProps
+  extends PicssoConfigKeyType,
+    PicssoDefaultConfigType {
   children?: any;
   customConfig?: any;
+  rawCss?: string;
   [key: string]: any;
 }
 
@@ -153,4 +157,16 @@ interface PicssoDefaultConfigType
   fw?: numStr;
 }
 
-export { type PicssoDefaultConfigType, picsso as default };
+
+/**
+ * The css function allows embedding and processing CSS within JavaScript/TypeScript using template literals.
+ */
+declare function css(strings: TemplateStringsArray, ...values: string[]): string;
+
+/**
+ * e.g. number 2 -> string "2px"
+ * @param value number or string
+ */
+declare function toPixel(value: numStr): string;
+
+export { type PicssoDefaultConfigType, css, picsso as default, type numStr, toPixel };
