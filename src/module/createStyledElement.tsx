@@ -1,73 +1,38 @@
-import React, { Ref, forwardRef } from "react";
+import React, { Ref, forwardRef, memo, useCallback } from "react";
 import { PicssoElementType, PicssoProps } from "../../@config/types/common";
 import seperateStyleString from "./seperateStyleString";
-import generateRandomString from "./generateRandomString";
 import picssoStyled from "./picssoStyled";
+import useClassName from "./useClassName";
 
-const extractKeyframes = (cssString: string) => {
-  const keyframesRegex = /@keyframes\s+[\s\S]+?\{[\s\S]+?\}\s*\}/g;
-  const fontFaceRegex = /@font-face\s*\{[\s\S]+?\}/g;
-
-  const keyframes = cssString.match(keyframesRegex) || [];
-  const fontFaces = cssString.match(fontFaceRegex) || [];
-
-  const cleanedCss = cssString
-    .replace(keyframesRegex, "")
-    .replace(fontFaceRegex, "");
-
-  return {
-    keyframes: keyframes.join(" "),
-    fontFaces: fontFaces.join(" "),
-    cleanedCss,
-  };
-};
+// 스타일 캐시 전역 변수로 선언
+const styleCache = new Map();
 
 const createStyledElement = (tagName: string): PicssoElementType => {
-  return forwardRef(
-    (
-      { children, customConfig, rawCss, ...props }: PicssoProps,
-      ref: Ref<HTMLElement>
-    ) => {
-      const [styleString, otherProps] = seperateStyleString(
-        props,
-        customConfig
-      );
-      const HTMLTag = picssoStyled(tagName)(styleString as string);
+  return memo(
+    forwardRef(
+      (
+        { children, customConfig, rawCss, ...props }: PicssoProps,
+        ref: Ref<HTMLElement>
+      ) => {
+        const [styleString, otherProps] = seperateStyleString(
+          props,
+          customConfig
+        );
+        const className = useClassName({
+          rawCss,
+          initialClassName: otherProps.className || "",
+          styleCache,
+        });
 
-      let className = otherProps.className;
+        const HTMLTag = picssoStyled(tagName)(styleString as string);
 
-      if (rawCss) {
-        let styleSheet = document.createElement("style");
-        const rs = `picsso-${generateRandomString()}`;
-        styleSheet.setAttribute("data-picsso", rs);
-        const injectionStyleString = `.${rs} {${rawCss.replace(/\s+/g, " ")}}`;
-        if (injectionStyleString.includes("@keyframes")) {
-          let keyframeStyleSheet = document.createElement("style");
-          keyframeStyleSheet.setAttribute("data-picsso_keyframe", rs);
-          keyframeStyleSheet.innerText =
-            extractKeyframes(injectionStyleString).keyframes;
-          document.head.appendChild(keyframeStyleSheet);
-        }
-        if (injectionStyleString.includes("@font-face")) {
-          let fontFaceStyleSheet = document.createElement("style");
-          fontFaceStyleSheet.setAttribute("data-picsso_fontFace", rs);
-          fontFaceStyleSheet.innerText =
-            extractKeyframes(injectionStyleString).fontFaces;
-          document.head.appendChild(fontFaceStyleSheet);
-        }
-
-        styleSheet.innerText = injectionStyleString;
-        className ? (className += `${rs}`) : (className = `${rs}`);
-        otherProps.className = className;
-
-        document.head.appendChild(styleSheet);
+        return (
+          <HTMLTag ref={ref} className={className || undefined} {...otherProps}>
+            {children}
+          </HTMLTag>
+        );
       }
-      return (
-        <HTMLTag ref={ref} {...otherProps}>
-          {children}
-        </HTMLTag>
-      );
-    }
+    )
   );
 };
 

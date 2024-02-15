@@ -25,16 +25,23 @@ export interface PicssoDefaultConfigType
   overflowY?: string;
   /** display: none; */
   none?: boolean;
+  /** Equals to gap. Involves "display: flex;". */
   gap?: numStr;
   flexDirection?: string;
+  /** flex-direction: column; Involves "display: flex;". */
   column?: boolean;
+  /** flex-direction: column; Involves "display: flex;". */
   col?: boolean;
+  /** flex-direction: row; Involves "display: flex;". */
   row?: boolean;
   position?: string;
   ellipsis?: boolean;
   /** cursor: pointer; */
   pointer?: boolean;
   textAlign?: string;
+  textCenter?: boolean;
+  textLeft?: boolean;
+  textRight?: boolean;
   between?: boolean;
   fontSize?: numStr;
   /** Equals to font-size. */
