@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState, useEffect, memo } from 'react';
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -367,7 +367,7 @@ var picssoDefaultConfig = __assign(__assign(__assign(__assign(__assign(__assign(
   },
   gap: {
     getValue: function getValue(margin) {
-      return "gap:".concat(toPixel(margin), ";");
+      return "display:flex; gap:".concat(toPixel(margin), ";");
     }
   },
   flexDirection: {
@@ -377,17 +377,17 @@ var picssoDefaultConfig = __assign(__assign(__assign(__assign(__assign(__assign(
   },
   column: {
     getValue: function getValue() {
-      return "flex-direction:column;";
+      return "display:flex; flex-direction:column;";
     }
   },
   col: {
     getValue: function getValue() {
-      return "flex-direction:column;";
+      return "display:flex; flex-direction:column;";
     }
   },
   row: {
     getValue: function getValue() {
-      return "flex-direction:row;";
+      return "display:flex; flex-direction:row;";
     }
   },
   position: {
@@ -408,6 +408,21 @@ var picssoDefaultConfig = __assign(__assign(__assign(__assign(__assign(__assign(
   textAlign: {
     getValue: function getValue(textAlign) {
       return "text-align:".concat(textAlign, ";");
+    }
+  },
+  textCenter: {
+    getValue: function getValue() {
+      return "text-align:center;";
+    }
+  },
+  textRight: {
+    getValue: function getValue() {
+      return "text-align:right;";
+    }
+  },
+  textLeft: {
+    getValue: function getValue() {
+      return "text-align:left;";
     }
   },
   between: {
@@ -464,18 +479,9 @@ function seperateStyleString(props, customConfig) {
   return [formattedStyleString, otherProps];
 }
 
-function generateRandomString() {
-  var characters = "abcdefghijklmnopqrstuvwxyz0123456789";
-  var result = "";
-  for (var i = 0; i < 6; i++) {
-    result += characters[Math.floor(Math.random() * 36)];
-  }
-  return result;
-}
-
-var styleCache = new Map();
+var styleCache$1 = new Map();
 var camelStyle = function camelStyle(styleString) {
-  var cachedStyle = styleCache.get(styleString);
+  var cachedStyle = styleCache$1.get(styleString);
   if (cachedStyle) {
     return cachedStyle;
   }
@@ -494,7 +500,7 @@ var camelStyle = function camelStyle(styleString) {
     }
   });
   var camelCaseStyle = tempStyleObject;
-  styleCache.set(styleString, camelCaseStyle);
+  styleCache$1.set(styleString, camelCaseStyle);
   return camelCaseStyle;
 };
 var picssoStyled = function picssoStyled(Component) {
@@ -514,24 +520,61 @@ var picssoStyled = function picssoStyled(Component) {
   };
 };
 
+function generateRandomString() {
+  var characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+  var result = "";
+  for (var i = 0; i < 6; i++) {
+    result += characters[Math.floor(Math.random() * 36)];
+  }
+  return result;
+}
+
+function useStyledClassName(_a) {
+  var rawCss = _a.rawCss,
+    initialClassName = _a.initialClassName,
+    styleCache = _a.styleCache;
+  var _b = useState(initialClassName),
+    className = _b[0],
+    setClassName = _b[1];
+  useEffect(function () {
+    if (rawCss) {
+      var rs_1 = styleCache.get(rawCss);
+      if (!rs_1) {
+        rs_1 = "picsso-".concat(generateRandomString());
+        styleCache.set(rawCss, rs_1);
+        var _a = extractKeyframes(rawCss),
+          keyframes = _a.keyframes,
+          fontFaces = _a.fontFaces,
+          cleanedCss = _a.cleanedCss;
+        var styleSheet = document.createElement("style");
+        styleSheet.setAttribute("data-picsso", rs_1);
+        styleSheet.textContent = ".".concat(rs_1, " { ").concat(cleanedCss, " } ").concat(keyframes, " ").concat(fontFaces);
+        document.head.appendChild(styleSheet);
+      }
+      setClassName(function (prevClassName) {
+        return "".concat(prevClassName, " ").concat(rs_1).trim();
+      });
+    }
+  }, [rawCss, initialClassName]);
+  return className;
+}
 var extractKeyframes = function extractKeyframes(cssString) {
-  // @keyframes 및 기타 최상위 규칙을 찾기 위한 정규 표현식 예시
   var keyframesRegex = /@keyframes\s+[\s\S]+?\{[\s\S]+?\}\s*\}/g;
   var fontFaceRegex = /@font-face\s*\{[\s\S]+?\}/g;
-  // 규칙 추출
   var keyframes = cssString.match(keyframesRegex) || [];
   var fontFaces = cssString.match(fontFaceRegex) || [];
-  // 추출된 규칙을 원본 문자열에서 제거
   var cleanedCss = cssString.replace(keyframesRegex, "").replace(fontFaceRegex, "");
-  // 결과 반환
   return {
     keyframes: keyframes.join(" "),
     fontFaces: fontFaces.join(" "),
     cleanedCss: cleanedCss
   };
 };
+
+// 스타일 캐시 전역 변수로 선언
+var styleCache = new Map();
 var createStyledElement = function createStyledElement(tagName) {
-  return /*#__PURE__*/forwardRef(function (_a, ref) {
+  return /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function (_a, ref) {
     var children = _a.children,
       customConfig = _a.customConfig,
       rawCss = _a.rawCss,
@@ -539,34 +582,17 @@ var createStyledElement = function createStyledElement(tagName) {
     var _b = seperateStyleString(props, customConfig),
       styleString = _b[0],
       otherProps = _b[1];
+    var className = useStyledClassName({
+      rawCss: rawCss,
+      initialClassName: otherProps.className || "",
+      styleCache: styleCache
+    });
     var HTMLTag = picssoStyled(tagName)(styleString);
-    var className = otherProps.className;
-    if (rawCss) {
-      var styleSheet = document.createElement("style");
-      var rs = "picsso-".concat(generateRandomString());
-      styleSheet.setAttribute("data-picsso", rs);
-      var injectionStyleString = ".".concat(rs, " {").concat(rawCss.replace(/\s+/g, " "), "}"); // 연속된 공백을 하나의 공백으로 변환
-      if (injectionStyleString.includes("@keyframes")) {
-        var keyframeStyleSheet = document.createElement("style");
-        keyframeStyleSheet.setAttribute("data-picsso_keyframe", rs);
-        keyframeStyleSheet.innerText = extractKeyframes(injectionStyleString).keyframes;
-        document.head.appendChild(keyframeStyleSheet);
-      }
-      if (injectionStyleString.includes("@font-face")) {
-        var fontFaceStyleSheet = document.createElement("style");
-        fontFaceStyleSheet.setAttribute("data-picsso_fontFace", rs);
-        fontFaceStyleSheet.innerText = extractKeyframes(injectionStyleString).fontFaces;
-        document.head.appendChild(fontFaceStyleSheet);
-      }
-      styleSheet.innerText = injectionStyleString;
-      className ? className += "".concat(rs) : className = "".concat(rs);
-      otherProps.className = className;
-      document.head.appendChild(styleSheet);
-    }
     return /*#__PURE__*/React.createElement(HTMLTag, __assign({
-      ref: ref
+      ref: ref,
+      className: className || undefined
     }, otherProps), children);
-  });
+  }));
 };
 
 var htmlTags = ["a", "abbr", "address", "area", "article", "aside", "audio", "b", "base", "bdi", "bdo", "big", "blockquote", "body", "br", "button", "canvas", "caption", "center", "cite", "code", "col", "colgroup", "data", "datalist", "dd", "del", "details", "dfn", "dialog", "div", "dl", "dt", "em", "embed", "fieldset", "figcaption", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "head", "header", "hgroup", "hr", "html", "i", "iframe", "img", "input", "ins", "kbd", "keygen", "label", "legend", "li", "link", "main", "map", "mark", "menu", "menuitem", "meta", "meter", "nav", "noindex", "noscript", "object", "ol", "optgroup", "option", "output", "p", "param", "picture", "pre", "progress", "q", "rp", "rt", "ruby", "s", "samp", "search", "slot", "script", "section", "select", "small", "source", "span", "strong", "style", "sub", "summary", "sup", "table", "template", "tbody", "td", "textarea", "tfoot", "th", "thead", "time", "title", "tr", "track", "u", "ul", "var", "video", "wbr", "webview", "svg", "animate", "animateMotion", "animateTransform", "circle", "clipPath", "defs", "desc", "ellipse", "feBlend", "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feDropShadow", "feFlood", "feFuncA", "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge", "feMergeNode", "feMorphology", "feOffset", "fePointLight", "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence", "filter", "foreignObject", "g", "image", "line", "linearGradient", "marker", "mask", "metadata", "mpath", "path", "pattern", "polygon", "polyline", "radialGradient", "rect", "stop", "switch", "symbol", "text", "textPath", "tspan", "use", "view"];
