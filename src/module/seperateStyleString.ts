@@ -1,10 +1,7 @@
 import picssoDefaultConfig from "../../@config";
 import { PicssoConfigKeyType } from "../../@config/types/common";
 
-export default function seperateStyleString(
-  props: PicssoConfigKeyType,
-  customConfig: any
-) {
+export default function seperateStyleString(props: any, customConfig: any) {
   const totalKeys: string[] = Object.keys(props) as string[];
   const targetConfig = { ...customConfig, ...picssoDefaultConfig };
   const piccsoConfigKeys = Object.keys(

@@ -2,23 +2,23 @@ import { useEffect, useState } from "react";
 import generateRandomString from "./generateRandomString";
 
 export default function useStyledClassName({
-  rawCss,
+  css,
   initialClassName,
   styleCache,
 }: {
-  rawCss?: string;
+  css?: string;
   initialClassName?: string;
   styleCache: any;
 }) {
   const [className, setClassName] = useState(initialClassName);
 
   useEffect(() => {
-    if (rawCss) {
-      let rs = styleCache.get(rawCss);
+    if (css) {
+      let rs = styleCache.get(css);
       if (!rs) {
         rs = `picsso-${generateRandomString()}`;
-        styleCache.set(rawCss, rs);
-        const { keyframes, fontFaces, cleanedCss } = extractKeyframes(rawCss);
+        styleCache.set(css, rs);
+        const { keyframes, fontFaces, cleanedCss } = extractKeyframes(css);
         const styleSheet = document.createElement("style");
         styleSheet.setAttribute("data-picsso", rs);
         styleSheet.textContent = `.${rs} { ${cleanedCss} } ${keyframes} ${fontFaces}`;
@@ -26,7 +26,7 @@ export default function useStyledClassName({
       }
       setClassName((prevClassName) => `${prevClassName} ${rs}`.trim());
     }
-  }, [rawCss, initialClassName]);
+  }, [css, initialClassName]);
 
   return className;
 }

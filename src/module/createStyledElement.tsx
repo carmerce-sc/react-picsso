@@ -1,35 +1,36 @@
-import React, { Ref, forwardRef, memo, useCallback } from "react";
-import { PicssoElementType, PicssoProps } from "../../@config/types/common";
+import React, { forwardRef, ComponentType, ReactNode, useMemo } from "react";
+import styled from "@emotion/styled";
 import seperateStyleString from "./seperateStyleString";
-import picssoStyled from "./picssoStyled";
-import useClassName from "./useClassName";
 
-// 스타일 캐시 전역 변수로 선언
-const styleCache = new Map();
+interface StyledElementProps {
+  customConfig?: any;
+  css?: string;
+}
 
-const createStyledElement = (tagName: string): PicssoElementType => {
-  return memo(
-    forwardRef(
-      (
-        { children, customConfig, rawCss, ...props }: PicssoProps,
-        ref: Ref<HTMLElement>
-      ) => {
+const createStyledElement = <Props extends {}>(
+  tagName: ComponentType<Props> | keyof JSX.IntrinsicElements
+) => {
+  type ComponentProps = Props & StyledElementProps;
+
+  return React.memo(
+    forwardRef<HTMLDivElement, ComponentProps & { children?: ReactNode }>(
+      ({ children, customConfig, ...props }, ref) => {
         const [styleString, otherProps] = seperateStyleString(
           props,
           customConfig
         );
-        const className = useClassName({
-          rawCss,
-          initialClassName: otherProps.className || "",
-          styleCache,
-        });
 
-        const HTMLTag = picssoStyled(tagName)(styleString as string);
+        const StyledComponent = useMemo(() => {
+          return styled(tagName as any)<ComponentProps>`
+            ${(props) => props.css || ""}
+            ${styleString}
+          `;
+        }, [styleString, tagName]);
 
         return (
-          <HTMLTag ref={ref} className={className || undefined} {...otherProps}>
+          <StyledComponent ref={ref as any} {...otherProps}>
             {children}
-          </HTMLTag>
+          </StyledComponent>
         );
       }
     )

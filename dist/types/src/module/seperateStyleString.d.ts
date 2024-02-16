@@ -1,3 +1,2 @@
-import { PicssoConfigKeyType } from "../../@config/types/common";
-export default function seperateStyleString(props: PicssoConfigKeyType, customConfig: any): any[];
+export default function seperateStyleString(props: any, customConfig: any): any[];
 //# sourceMappingURL=seperateStyleString.d.ts.map
