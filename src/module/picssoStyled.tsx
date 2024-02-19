@@ -34,7 +34,7 @@ const picssoStyled =
     >((props, ref) => {
       const camelCaseStyle = camelStyle(styleString);
       const componentProps = { ...props, style: camelCaseStyle };
-      // HTML 태그 문자열인 경우
+
       return React.createElement(
         Component,
         { ...componentProps, ref },
