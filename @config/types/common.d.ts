@@ -1,3 +1,4 @@
+import { PicssoDefaultConfigType } from "./index.d";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 export declare type PicssoElementTypes = {
@@ -9,9 +10,13 @@ export declare type PicssoConfigKeyType = {
 };
 
 export declare type numStr = number | string;
-export interface PicssoProps extends PicssoConfigKeyType {
+
+export interface PicssoProps
+  extends PicssoConfigKeyType,
+    PicssoDefaultConfigType {
   children?: any;
   customConfig?: any;
+  css?: string;
   [key: string]: any;
 }
 

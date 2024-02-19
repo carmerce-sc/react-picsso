@@ -25,16 +25,23 @@ export interface PicssoDefaultConfigType
   overflowY?: string;
   /** display: none; */
   none?: boolean;
+  /** Equals to gap. Involves "display: flex;". */
   gap?: numStr;
   flexDirection?: string;
+  /** flex-direction: column; Involves "display: flex;". */
   column?: boolean;
+  /** flex-direction: column; Involves "display: flex;". */
   col?: boolean;
+  /** flex-direction: row; Involves "display: flex;". */
   row?: boolean;
   position?: string;
   ellipsis?: boolean;
   /** cursor: pointer; */
   pointer?: boolean;
   textAlign?: string;
+  textCenter?: boolean;
+  textLeft?: boolean;
+  textRight?: boolean;
   between?: boolean;
   fontSize?: numStr;
   /** Equals to font-size. */
@@ -42,4 +49,19 @@ export interface PicssoDefaultConfigType
   fontWeight?: numStr;
   /** Equals to font-weight. */
   fw?: numStr;
+  boxShadow?: string;
+  letterSpacing?: numStr;
 }
+
+export { numStr } from "./common";
+
+/**
+ * The css function allows embedding and processing CSS within JavaScript/TypeScript using template literals.
+ */
+export function css(strings: TemplateStringsArray, ...values: string[]): string;
+
+/**
+ * e.g. number 2 -> string "2px"
+ * @param value number or string
+ */
+export function toPixel(value: numStr): string;

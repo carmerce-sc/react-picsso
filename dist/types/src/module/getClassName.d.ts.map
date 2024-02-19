@@ -1,0 +1,1 @@
+{"version":3,"file":"getClassName.d.ts","sourceRoot":"","sources":["../../../../src/module/getClassName.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,OAAO,UAAU,YAAY,CAAC,EACnC,GAAG,EACH,gBAAgB,EAChB,UAAU,GACX,EAAE;IACD,GAAG,CAAC,EAAE,MAAM,CAAC;IACb,gBAAgB,CAAC,EAAE,MAAM,CAAC;IAC1B,UAAU,EAAE,GAAG,CAAC,MAAM,EAAE,MAAM,CAAC,CAAC;CACjC,sBAoBA"}

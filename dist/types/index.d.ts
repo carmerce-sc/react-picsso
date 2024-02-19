@@ -17,9 +17,13 @@ declare type PicssoConfigKeyType = {
 };
 
 declare type numStr = number | string;
-interface PicssoProps extends PicssoConfigKeyType {
+
+interface PicssoProps
+  extends PicssoConfigKeyType,
+    PicssoDefaultConfigType {
   children?: any;
   customConfig?: any;
+  css?: string;
   [key: string]: any;
 }
 
@@ -134,16 +138,23 @@ interface PicssoDefaultConfigType
   overflowY?: string;
   /** display: none; */
   none?: boolean;
+  /** Equals to gap. Involves "display: flex;". */
   gap?: numStr;
   flexDirection?: string;
+  /** flex-direction: column; Involves "display: flex;". */
   column?: boolean;
+  /** flex-direction: column; Involves "display: flex;". */
   col?: boolean;
+  /** flex-direction: row; Involves "display: flex;". */
   row?: boolean;
   position?: string;
   ellipsis?: boolean;
   /** cursor: pointer; */
   pointer?: boolean;
   textAlign?: string;
+  textCenter?: boolean;
+  textLeft?: boolean;
+  textRight?: boolean;
   between?: boolean;
   fontSize?: numStr;
   /** Equals to font-size. */
@@ -151,6 +162,20 @@ interface PicssoDefaultConfigType
   fontWeight?: numStr;
   /** Equals to font-weight. */
   fw?: numStr;
+  boxShadow?: string;
+  letterSpacing?: numStr;
 }
 
-export { type PicssoDefaultConfigType, picsso as default };
+
+/**
+ * The css function allows embedding and processing CSS within JavaScript/TypeScript using template literals.
+ */
+declare function css(strings: TemplateStringsArray, ...values: string[]): string;
+
+/**
+ * e.g. number 2 -> string "2px"
+ * @param value number or string
+ */
+declare function toPixel(value: numStr): string;
+
+export { type PicssoDefaultConfigType, css, picsso as default, type numStr, toPixel };

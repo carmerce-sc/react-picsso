@@ -1,5 +1,7 @@
 'use strict';
 
+Object.defineProperty(exports, '__esModule', { value: true });
+
 var React = require('react');
 
 /******************************************************************************
@@ -369,7 +371,7 @@ var picssoDefaultConfig = __assign(__assign(__assign(__assign(__assign(__assign(
   },
   gap: {
     getValue: function getValue(margin) {
-      return "gap:".concat(toPixel(margin), ";");
+      return "display:flex; gap:".concat(toPixel(margin), ";");
     }
   },
   flexDirection: {
@@ -379,17 +381,17 @@ var picssoDefaultConfig = __assign(__assign(__assign(__assign(__assign(__assign(
   },
   column: {
     getValue: function getValue() {
-      return "flex-direction:column;";
+      return "display:flex; flex-direction:column;";
     }
   },
   col: {
     getValue: function getValue() {
-      return "flex-direction:column;";
+      return "display:flex; flex-direction:column;";
     }
   },
   row: {
     getValue: function getValue() {
-      return "flex-direction:row;";
+      return "display:flex; flex-direction:row;";
     }
   },
   position: {
@@ -410,6 +412,21 @@ var picssoDefaultConfig = __assign(__assign(__assign(__assign(__assign(__assign(
   textAlign: {
     getValue: function getValue(textAlign) {
       return "text-align:".concat(textAlign, ";");
+    }
+  },
+  textCenter: {
+    getValue: function getValue() {
+      return "text-align:center;";
+    }
+  },
+  textRight: {
+    getValue: function getValue() {
+      return "text-align:right;";
+    }
+  },
+  textLeft: {
+    getValue: function getValue() {
+      return "text-align:left;";
     }
   },
   between: {
@@ -435,6 +452,16 @@ var picssoDefaultConfig = __assign(__assign(__assign(__assign(__assign(__assign(
   fw: {
     getValue: function getValue(fontWeight) {
       return "font-weight:".concat(fontWeight, ";");
+    }
+  },
+  boxShadow: {
+    getValue: function getValue(boxShadow) {
+      return "box-shadow:".concat(boxShadow, ";");
+    }
+  },
+  letterSpacing: {
+    getValue: function getValue(letterSpacing) {
+      return "letter-spacing:".concat(toPixel(letterSpacing), ";");
     }
   }
 });
@@ -466,9 +493,9 @@ function seperateStyleString(props, customConfig) {
   return [formattedStyleString, otherProps];
 }
 
-var styleCache = new Map();
+var styleCache$1 = new Map();
 var camelStyle = function camelStyle(styleString) {
-  var cachedStyle = styleCache.get(styleString);
+  var cachedStyle = styleCache$1.get(styleString);
   if (cachedStyle) {
     return cachedStyle;
   }
@@ -487,18 +514,16 @@ var camelStyle = function camelStyle(styleString) {
     }
   });
   var camelCaseStyle = tempStyleObject;
-  styleCache.set(styleString, camelCaseStyle);
+  styleCache$1.set(styleString, camelCaseStyle);
   return camelCaseStyle;
 };
 var picssoStyled = function picssoStyled(Component) {
   return function (styleString) {
-    // forwardRef를 사용하여 컴포넌트에 ref를 전달할 수 있도록 수정
     var StyledComponent = /*#__PURE__*/React.forwardRef(function (props, ref) {
       var camelCaseStyle = camelStyle(styleString);
       var componentProps = __assign(__assign({}, props), {
         style: camelCaseStyle
       });
-      // HTML 태그 문자열인 경우
       return /*#__PURE__*/React.createElement(Component, __assign(__assign({}, componentProps), {
         ref: ref
       }), props.children);
@@ -508,26 +533,235 @@ var picssoStyled = function picssoStyled(Component) {
   };
 };
 
-function createStyledElement(tagName) {
-  return /*#__PURE__*/React.forwardRef(function (_a, ref) {
+function generateRandomString() {
+  var characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+  var result = "";
+  for (var i = 0; i < 6; i++) {
+    result += characters[Math.floor(Math.random() * 36)];
+  }
+  return result;
+}
+
+function getClassName(_a) {
+  var css = _a.css,
+    initialClassName = _a.initialClassName,
+    styleCache = _a.styleCache;
+  var className = initialClassName;
+  // useEffect(() => {
+  if (css) {
+    var rs = styleCache.get(css);
+    if (!rs) {
+      rs = "picsso-".concat(generateRandomString());
+      styleCache.set(css, rs);
+      var _b = extractKeyframes(css),
+        keyframes = _b.keyframes,
+        fontFaces = _b.fontFaces,
+        cleanedCss = _b.cleanedCss;
+      var styleSheet = document.createElement("style");
+      styleSheet.setAttribute("data-picsso", rs);
+      styleSheet.textContent = ".".concat(rs, " { ").concat(cleanedCss, " } ").concat(keyframes, " ").concat(fontFaces);
+      document.head.appendChild(styleSheet);
+    }
+    className = "".concat(initialClassName, " ").concat(rs).trim();
+  }
+  // }, [css, initialClassName]);
+  return className;
+}
+var extractKeyframes = function extractKeyframes(cssString) {
+  var keyframesRegex = /@keyframes\s+[\s\S]+?\{[\s\S]+?\}\s*\}/g;
+  var fontFaceRegex = /@font-face\s*\{[\s\S]+?\}/g;
+  var keyframes = cssString.match(keyframesRegex) || [];
+  var fontFaces = cssString.match(fontFaceRegex) || [];
+  var cleanedCss = cssString.replace(keyframesRegex, "").replace(fontFaceRegex, "");
+  return {
+    keyframes: keyframes.join(" "),
+    fontFaces: fontFaces.join(" "),
+    cleanedCss: cleanedCss
+  };
+};
+
+var styleCache = new Map();
+var createStyledElement = function createStyledElement(tagName) {
+  return /*#__PURE__*/React.memo( /*#__PURE__*/React.forwardRef(function (_a, ref) {
     var children = _a.children,
       customConfig = _a.customConfig,
-      props = __rest(_a, ["children", "customConfig"]);
+      css = _a.css,
+      props = __rest(_a, ["children", "customConfig", "css"]);
     var _b = seperateStyleString(props, customConfig),
       styleString = _b[0],
       otherProps = _b[1];
-    var HTMLTag = picssoStyled(tagName)(styleString);
+    var className = getClassName({
+      css: css,
+      initialClassName: otherProps.className || "",
+      styleCache: styleCache
+    });
+    var HTMLTag = React.useMemo(function () {
+      return picssoStyled(tagName)(styleString);
+    }, [tagName, styleString]);
     return /*#__PURE__*/React.createElement(HTMLTag, __assign({
       ref: ref
-    }, otherProps), children);
-  });
-}
+    }, otherProps, {
+      className: className || undefined
+    }), children);
+  }));
+};
 
 var htmlTags = ["a", "abbr", "address", "area", "article", "aside", "audio", "b", "base", "bdi", "bdo", "big", "blockquote", "body", "br", "button", "canvas", "caption", "center", "cite", "code", "col", "colgroup", "data", "datalist", "dd", "del", "details", "dfn", "dialog", "div", "dl", "dt", "em", "embed", "fieldset", "figcaption", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "head", "header", "hgroup", "hr", "html", "i", "iframe", "img", "input", "ins", "kbd", "keygen", "label", "legend", "li", "link", "main", "map", "mark", "menu", "menuitem", "meta", "meter", "nav", "noindex", "noscript", "object", "ol", "optgroup", "option", "output", "p", "param", "picture", "pre", "progress", "q", "rp", "rt", "ruby", "s", "samp", "search", "slot", "script", "section", "select", "small", "source", "span", "strong", "style", "sub", "summary", "sup", "table", "template", "tbody", "td", "textarea", "tfoot", "th", "thead", "time", "title", "tr", "track", "u", "ul", "var", "video", "wbr", "webview", "svg", "animate", "animateMotion", "animateTransform", "circle", "clipPath", "defs", "desc", "ellipse", "feBlend", "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feDropShadow", "feFlood", "feFuncA", "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge", "feMergeNode", "feMorphology", "feOffset", "fePointLight", "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence", "filter", "foreignObject", "g", "image", "line", "linearGradient", "marker", "mask", "metadata", "mpath", "path", "pattern", "polygon", "polyline", "radialGradient", "rect", "stop", "switch", "symbol", "text", "textPath", "tspan", "use", "view"];
+// export const tags = [
+//   'a',
+//   'abbr',
+//   'address',
+//   'area',
+//   'article',
+//   'aside',
+//   'audio',
+//   'b',
+//   'base',
+//   'bdi',
+//   'bdo',
+//   'big',
+//   'blockquote',
+//   'body',
+//   'br',
+//   'button',
+//   'canvas',
+//   'caption',
+//   'cite',
+//   'code',
+//   'col',
+//   'colgroup',
+//   'data',
+//   'datalist',
+//   'dd',
+//   'del',
+//   'details',
+//   'dfn',
+//   'dialog',
+//   'div',
+//   'dl',
+//   'dt',
+//   'em',
+//   'embed',
+//   'fieldset',
+//   'figcaption',
+//   'figure',
+//   'footer',
+//   'form',
+//   'h1',
+//   'h2',
+//   'h3',
+//   'h4',
+//   'h5',
+//   'h6',
+//   'head',
+//   'header',
+//   'hgroup',
+//   'hr',
+//   'html',
+//   'i',
+//   'iframe',
+//   'img',
+//   'input',
+//   'ins',
+//   'kbd',
+//   'keygen',
+//   'label',
+//   'legend',
+//   'li',
+//   'link',
+//   'main',
+//   'map',
+//   'mark',
+//   'marquee',
+//   'menu',
+//   'menuitem',
+//   'meta',
+//   'meter',
+//   'nav',
+//   'noscript',
+//   'object',
+//   'ol',
+//   'optgroup',
+//   'option',
+//   'output',
+//   'p',
+//   'param',
+//   'picture',
+//   'pre',
+//   'progress',
+//   'q',
+//   'rp',
+//   'rt',
+//   'ruby',
+//   's',
+//   'samp',
+//   'script',
+//   'section',
+//   'select',
+//   'small',
+//   'source',
+//   'span',
+//   'strong',
+//   'style',
+//   'sub',
+//   'summary',
+//   'sup',
+//   'table',
+//   'tbody',
+//   'td',
+//   'textarea',
+//   'tfoot',
+//   'th',
+//   'thead',
+//   'time',
+//   'title',
+//   'tr',
+//   'track',
+//   'u',
+//   'ul',
+//   'var',
+//   'video',
+//   'wbr',
+//   // SVG
+//   'circle',
+//   'clipPath',
+//   'defs',
+//   'ellipse',
+//   'foreignObject',
+//   'g',
+//   'image',
+//   'line',
+//   'linearGradient',
+//   'mask',
+//   'path',
+//   'pattern',
+//   'polygon',
+//   'polyline',
+//   'radialGradient',
+//   'rect',
+//   'stop',
+//   'svg',
+//   'text',
+//   'tspan'
+// ]
 
 var picsso = htmlTags.reduce(function (acc, htmlKey) {
   acc[htmlKey] = createStyledElement(htmlKey);
   return acc;
 }, {});
 
-module.exports = picsso;
+function css(strings) {
+  var values = [];
+  for (var _i = 1; _i < arguments.length; _i++) {
+    values[_i - 1] = arguments[_i];
+  }
+  var result = "";
+  strings.forEach(function (string, i) {
+    result += string + (values[i] || "");
+  });
+  return result;
+}
+
+exports.css = css;
+exports.default = picsso;
+exports.toPixel = toPixel;
