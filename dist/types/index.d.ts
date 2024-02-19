@@ -23,7 +23,7 @@ interface PicssoProps
     PicssoDefaultConfigType {
   children?: any;
   customConfig?: any;
-  rawCss?: string;
+  css?: string;
   [key: string]: any;
 }
 
@@ -162,6 +162,8 @@ interface PicssoDefaultConfigType
   fontWeight?: numStr;
   /** Equals to font-weight. */
   fw?: numStr;
+  boxShadow?: string;
+  letterSpacing?: numStr;
 }
 
 

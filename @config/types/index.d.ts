@@ -49,6 +49,8 @@ export interface PicssoDefaultConfigType
   fontWeight?: numStr;
   /** Equals to font-weight. */
   fw?: numStr;
+  boxShadow?: string;
+  letterSpacing?: numStr;
 }
 
 export { numStr } from "./common";

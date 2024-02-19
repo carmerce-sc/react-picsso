@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useEffect, memo } from 'react';
+import React, { forwardRef, memo, useMemo } from 'react';
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -449,6 +449,16 @@ var picssoDefaultConfig = __assign(__assign(__assign(__assign(__assign(__assign(
     getValue: function getValue(fontWeight) {
       return "font-weight:".concat(fontWeight, ";");
     }
+  },
+  boxShadow: {
+    getValue: function getValue(boxShadow) {
+      return "box-shadow:".concat(boxShadow, ";");
+    }
+  },
+  letterSpacing: {
+    getValue: function getValue(letterSpacing) {
+      return "letter-spacing:".concat(toPixel(letterSpacing), ";");
+    }
   }
 });
 
@@ -510,7 +520,6 @@ var picssoStyled = function picssoStyled(Component) {
       var componentProps = __assign(__assign({}, props), {
         style: camelCaseStyle
       });
-      // HTML 태그 문자열인 경우
       return /*#__PURE__*/React.createElement(Component, __assign(__assign({}, componentProps), {
         ref: ref
       }), props.children);
@@ -529,33 +538,29 @@ function generateRandomString() {
   return result;
 }
 
-function useStyledClassName(_a) {
-  var rawCss = _a.rawCss,
+function getClassName(_a) {
+  var css = _a.css,
     initialClassName = _a.initialClassName,
     styleCache = _a.styleCache;
-  var _b = useState(initialClassName),
-    className = _b[0],
-    setClassName = _b[1];
-  useEffect(function () {
-    if (rawCss) {
-      var rs_1 = styleCache.get(rawCss);
-      if (!rs_1) {
-        rs_1 = "picsso-".concat(generateRandomString());
-        styleCache.set(rawCss, rs_1);
-        var _a = extractKeyframes(rawCss),
-          keyframes = _a.keyframes,
-          fontFaces = _a.fontFaces,
-          cleanedCss = _a.cleanedCss;
-        var styleSheet = document.createElement("style");
-        styleSheet.setAttribute("data-picsso", rs_1);
-        styleSheet.textContent = ".".concat(rs_1, " { ").concat(cleanedCss, " } ").concat(keyframes, " ").concat(fontFaces);
-        document.head.appendChild(styleSheet);
-      }
-      setClassName(function (prevClassName) {
-        return "".concat(prevClassName, " ").concat(rs_1).trim();
-      });
+  var className = initialClassName;
+  // useEffect(() => {
+  if (css) {
+    var rs = styleCache.get(css);
+    if (!rs) {
+      rs = "picsso-".concat(generateRandomString());
+      styleCache.set(css, rs);
+      var _b = extractKeyframes(css),
+        keyframes = _b.keyframes,
+        fontFaces = _b.fontFaces,
+        cleanedCss = _b.cleanedCss;
+      var styleSheet = document.createElement("style");
+      styleSheet.setAttribute("data-picsso", rs);
+      styleSheet.textContent = ".".concat(rs, " { ").concat(cleanedCss, " } ").concat(keyframes, " ").concat(fontFaces);
+      document.head.appendChild(styleSheet);
     }
-  }, [rawCss, initialClassName]);
+    className = "".concat(initialClassName, " ").concat(rs).trim();
+  }
+  // }, [css, initialClassName]);
   return className;
 }
 var extractKeyframes = function extractKeyframes(cssString) {
@@ -571,27 +576,29 @@ var extractKeyframes = function extractKeyframes(cssString) {
   };
 };
 
-// 스타일 캐시 전역 변수로 선언
 var styleCache = new Map();
 var createStyledElement = function createStyledElement(tagName) {
   return /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function (_a, ref) {
     var children = _a.children,
       customConfig = _a.customConfig,
-      rawCss = _a.rawCss,
-      props = __rest(_a, ["children", "customConfig", "rawCss"]);
+      css = _a.css,
+      props = __rest(_a, ["children", "customConfig", "css"]);
     var _b = seperateStyleString(props, customConfig),
       styleString = _b[0],
       otherProps = _b[1];
-    var className = useStyledClassName({
-      rawCss: rawCss,
+    var className = getClassName({
+      css: css,
       initialClassName: otherProps.className || "",
       styleCache: styleCache
     });
-    var HTMLTag = picssoStyled(tagName)(styleString);
+    var HTMLTag = useMemo(function () {
+      return picssoStyled(tagName)(styleString);
+    }, [tagName, styleString]);
     return /*#__PURE__*/React.createElement(HTMLTag, __assign({
-      ref: ref,
+      ref: ref
+    }, otherProps, {
       className: className || undefined
-    }, otherProps), children);
+    }), children);
   }));
 };
 

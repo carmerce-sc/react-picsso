@@ -16,7 +16,7 @@ export interface PicssoProps
     PicssoDefaultConfigType {
   children?: any;
   customConfig?: any;
-  rawCss?: string;
+  css?: string;
   [key: string]: any;
 }
 

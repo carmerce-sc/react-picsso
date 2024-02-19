@@ -52,6 +52,13 @@ const picssoDefaultConfig = {
   fw: {
     getValue: (fontWeight: string) => `font-weight:${fontWeight};`,
   },
+  boxShadow: {
+    getValue: (boxShadow: string) => `box-shadow:${boxShadow};`,
+  },
+  letterSpacing: {
+    getValue: (letterSpacing: numStr) =>
+      `letter-spacing:${toPixel(letterSpacing)};`,
+  },
 } as PicssoConfigKeyType;
 
 export default picssoDefaultConfig;
