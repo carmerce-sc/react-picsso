@@ -91,7 +91,7 @@ picsso.config.js
 
 ```javascript
 export default {
-  yourRedBorder: { getValue: () => "border: 2px dotted red;" },
+  yourRedBorder: () => "border: 2px dotted red;",
 };
 ```
 
@@ -101,7 +101,7 @@ picsso.config.ts
 
 ```javascript
 export default {
-  yourRedBorder: { getValue: () => "border: 2px dotted red;" },
+  yourRedBorder: () => "border: 2px dotted red;",
 };
 
 export type PicssoCustomConfigType = {

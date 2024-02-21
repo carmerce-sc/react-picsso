@@ -6,7 +6,7 @@ export declare type PicssoElementTypes = {
 };
 
 export declare type PicssoConfigKeyType = {
-  [key: string]: { getValue: (e: any) => string };
+  [key: string]: (e: any) => string;
 };
 
 export declare type numStr = number | string;

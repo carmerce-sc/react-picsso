@@ -22,7 +22,7 @@ export default function seperateStyleString(
   });
 
   const styleProps = targetPropsKeys.map((key: keyof PicssoConfigKeyType) =>
-    targetConfig?.[key]?.getValue(props[key])
+    targetConfig?.[key](props[key])
   );
   const styleString = styleProps.join(" ");
   const stylePropsArray = Array.from(new Set(styleString.split(";")));

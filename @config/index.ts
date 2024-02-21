@@ -13,52 +13,34 @@ const picssoDefaultConfig = {
   ...PicssoPaddingConfig,
   ...PicssoSizeConfig,
 
-  jc: { getValue: () => "display:flex; justify-content:center;" },
-  ac: { getValue: () => "display:flex; align-items:center;" },
-  flex: { getValue: () => "display:flex;" },
-  overflow: { getValue: (overflow: string) => `overflow:${overflow};` },
-  overflowX: { getValue: (overflowX: string) => `overflow-x:${overflowX};` },
-  overflowY: { getValue: (overflowY: string) => `overflow-y:${overflowY};` },
-  none: { getValue: () => "display:none;" },
-  gap: {
-    getValue: (margin: numStr) => `display:flex; gap:${toPixel(margin)};`,
-  },
-  flexDirection: {
-    getValue: (flexDirection: string) => `flex-direction:${flexDirection};`,
-  },
-  column: { getValue: () => "display:flex; flex-direction:column;" },
-  col: { getValue: () => "display:flex; flex-direction:column;" },
-  row: { getValue: () => "display:flex; flex-direction:row;" },
-  position: { getValue: (position: string) => `position:${position};` },
-  ellipsis: {
-    getValue: () =>
-      "text-overflow:ellipsis; overflow:hidden; white-space:nowrap;",
-  },
-  pointer: { getValue: () => "cursor: pointer;" },
-  textAlign: { getValue: (textAlign: string) => `text-align:${textAlign};` },
-  textCenter: { getValue: () => `text-align:center;` },
-  textRight: { getValue: () => `text-align:right;` },
-  textLeft: { getValue: () => `text-align:left;` },
-  between: { getValue: () => "justify-content:space-between;" },
-  fontSize: {
-    getValue: (fontSize: string) => `font-size:${toPixel(fontSize)};`,
-  },
-  fs: {
-    getValue: (fontSize: string) => `font-size:${toPixel(fontSize)};`,
-  },
-  fontWeight: {
-    getValue: (fontWeight: string) => `font-weight:${fontWeight};`,
-  },
-  fw: {
-    getValue: (fontWeight: string) => `font-weight:${fontWeight};`,
-  },
-  boxShadow: {
-    getValue: (boxShadow: string) => `box-shadow:${boxShadow};`,
-  },
-  letterSpacing: {
-    getValue: (letterSpacing: numStr) =>
-      `letter-spacing:${toPixel(letterSpacing)};`,
-  },
+  jc: () => "display:flex; justify-content:center;",
+  ac: () => "display:flex; align-items:center;",
+  flex: () => "display:flex;",
+  overflow: (overflow: string) => `overflow:${overflow};`,
+  overflowX: (overflowX: string) => `overflow-x:${overflowX};`,
+  overflowY: (overflowY: string) => `overflow-y:${overflowY};`,
+  none: () => "display:none;",
+  gap: (margin: numStr) => `display:flex; gap:${toPixel(margin)};`,
+  flexDirection: (flexDirection: string) => `flex-direction:${flexDirection};`,
+  column: () => "display:flex; flex-direction:column;",
+  col: () => "display:flex; flex-direction:column;",
+  row: () => "display:flex; flex-direction:row;",
+  position: (position: string) => `position:${position};`,
+  ellipsis: () =>
+    "text-overflow:ellipsis; overflow:hidden; white-space:nowrap;",
+  pointer: () => "cursor: pointer;",
+  textAlign: (textAlign: string) => `text-align:${textAlign};`,
+  textCenter: () => `text-align:center;`,
+  textRight: () => `text-align:right;`,
+  textLeft: () => `text-align:left;`,
+  between: () => "justify-content:space-between;",
+  fontSize: (fontSize: string) => `font-size:${toPixel(fontSize)};`,
+  fs: (fontSize: string) => `font-size:${toPixel(fontSize)};`,
+  fontWeight: (fontWeight: string) => `font-weight:${fontWeight};`,
+  fw: (fontWeight: string) => `font-weight:${fontWeight};`,
+  boxShadow: (boxShadow: string) => `box-shadow:${boxShadow};`,
+  letterSpacing: (letterSpacing: numStr) =>
+    `letter-spacing:${toPixel(letterSpacing)};`,
 } as PicssoConfigKeyType;
 
 export default picssoDefaultConfig;
